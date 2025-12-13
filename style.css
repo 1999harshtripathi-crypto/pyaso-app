@@ -1,3 +1,4 @@
+/* RESET */
 *{
   box-sizing:border-box;
 }
@@ -9,13 +10,17 @@ body{
   padding-bottom:90px;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 .header{
   background:linear-gradient(180deg,#9fd6ff,#ffffff);
   text-align:center;
   padding:25px 20px;
   border-bottom-left-radius:30px;
   border-bottom-right-radius:30px;
+}
+
+.small-header{
+  padding:15px;
 }
 
 .logo{
@@ -33,7 +38,7 @@ body{
   color:#4b6b88;
 }
 
-/* CARD */
+/* ================= CARD ================= */
 .card{
   background:#fff;
   margin:15px;
@@ -50,7 +55,7 @@ body{
   gap:10px;
 }
 
-/* ICON */
+/* ================= ICON ================= */
 .icon{
   width:48px;
   height:48px;
@@ -64,12 +69,14 @@ body{
 
 .jar-logo{
   width:26px;
+  height:auto;
 }
 
-/* TEXT */
+/* ================= TEXT ================= */
 .text h3{
   margin:0;
   color:#0f2a44;
+  font-size:16px;
 }
 
 .text small{
@@ -77,7 +84,7 @@ body{
   font-weight:600;
 }
 
-/* QTY */
+/* ================= QTY ================= */
 .qty{
   display:flex;
   align-items:center;
@@ -96,7 +103,7 @@ body{
   font-weight:bold;
 }
 
-/* TAG */
+/* ================= TAG ================= */
 .tag{
   position:absolute;
   top:-10px;
@@ -112,7 +119,7 @@ body{
   background:#ff7a18;
 }
 
-/* BUTTON */
+/* ================= BUTTON ================= */
 .checkout button{
   width:90%;
   margin:20px 5%;
@@ -124,7 +131,7 @@ body{
   border-radius:20px;
 }
 
-/* BOTTOM NAV */
+/* ================= BOTTOM NAV ================= */
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -151,4 +158,58 @@ body{
 
 .bottom-nav .active{
   color:#2f80ed;
+}
+
+/* ================= CART ================= */
+.cart-container{
+  padding:10px;
+}
+
+.cart-card{
+  background:#fff;
+  margin:12px;
+  padding:15px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+.cart-icon{
+  font-size:26px;
+  background:#eaf4ff;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cart-text h3{
+  margin:0;
+  font-size:15px;
+  color:#0f2a44;
+}
+
+.cart-text small{
+  color:#4b6b88;
+}
+
+.cart-price{
+  font-weight:bold;
+  font-size:16px;
+}
+
+/* ================= CART TOTAL ================= */
+.cart-total{
+  margin:20px;
+  padding:15px;
+  background:#f1f8ff;
+  border-radius:16px;
+  display:flex;
+  justify-content:space-between;
+  font-size:16px;
+  color:#0f2a44;
 }
