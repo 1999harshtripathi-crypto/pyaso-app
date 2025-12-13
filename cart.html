@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cart</title>
-  <link rel="stylesheet" href="style.css">
+<title>Cart</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -10,19 +10,22 @@
   <h1>My Cart</h1>
 </div>
 
-<div class="card">
-  <h3>1 Jar</h3>
-  <p>Total: ₹40</p>
-</div>
+<div class="card" id="cartItems"></div>
 
-<div class="card">
-  <h3>Subscription</h3>
-  <p>Monthly – ₹899</p>
-</div>
+<script>
+let jar=+localStorage.getItem("jar");
+let weekly=+localStorage.getItem("weekly");
+let monthly=+localStorage.getItem("monthly");
 
-<div class="card">
-  <h2>Grand Total: ₹939</h2>
-</div>
+let html="", total=0;
+
+if(jar>0){html+=`<p>${jar} Jar = ₹${jar*40}</p>`; total+=jar*40;}
+if(weekly>0){html+=`<p>Weekly = ₹245</p>`; total+=245;}
+if(monthly>0){html+=`<p>Monthly = ₹899</p>`; total+=899;}
+
+html+=`<hr><h3>Total: ₹${total}</h3>`;
+document.getElementById("cartItems").innerHTML=html;
+</script>
 
 </body>
 </html>
