@@ -2,92 +2,60 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Products</title>
+<title>Products - PYASO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f3f7fb;
-}
-.container{
-  padding:16px;
-  padding-bottom:90px;
-}
-h2{
-  margin-bottom:16px;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f8fc}
+.container{padding:20px;padding-bottom:90px}
+h2{margin-bottom:20px}
+
 .card{
-  background:#fff;
-  border-radius:16px;
-  padding:14px;
-  margin-bottom:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 6px 14px rgba(0,0,0,.06);
+background:#fff;
+border-radius:18px;
+padding:14px;
+margin-bottom:16px;
+box-shadow:0 8px 18px rgba(0,0,0,.06);
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
-.left{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
+
+.left{display:flex;gap:12px;align-items:center}
 .left img{
-  width:56px;
-  height:56px;
-  object-fit:contain;
-  border-radius:12px;
-  background:#eef5ff;
+width:60px;
+height:60px;
+border-radius:12px;
+object-fit:cover;
+background:#eaf6ff;
 }
-.name{
-  font-weight:bold;
-  font-size:15px;
-}
-.price{
-  color:#555;
-  font-size:14px;
-}
-.qty{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+
+.qty{display:flex;align-items:center;gap:8px}
 .qty button{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  border:none;
-  background:#eaf6ff;
-  font-size:18px;
+width:36px;height:36px;border-radius:50%;
+border:none;background:#eaf6ff;font-size:18px
 }
-.qty span{
-  min-width:18px;
-  text-align:center;
+
+.add-btn{
+margin-top:20px;
+width:100%;
+padding:14px;
+background:#2f80ed;
+color:#fff;
+border:none;
+border-radius:14px;
+font-size:16px;
 }
+
 .bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  border-top:1px solid #ddd;
-  padding:8px 0;
+position:fixed;bottom:0;left:0;right:0;
+background:#fff;display:flex;justify-content:space-around;
+border-top:1px solid #ddd;padding:8px 0
 }
-.bottom-nav div{
-  text-align:center;
-  font-size:12px;
-  color:#777;
-}
-.bottom-nav i{
-  font-size:18px;
-  display:block;
-}
-.active{color:#2f80ed;}
+.bottom-nav div{text-align:center;font-size:12px;color:#777}
+.bottom-nav i{font-size:18px;display:block}
+.active{color:#2f80ed}
 </style>
 </head>
 
@@ -101,14 +69,14 @@ h2{
   <div class="left">
     <img src="file_00000000c05472079906499cc10f550a.png">
     <div>
-      <div class="name">Dispenser</div>
-      <div class="price">₹200</div>
+      <b>Dispenser</b>
+      <div>₹200</div>
     </div>
   </div>
   <div class="qty">
-    <button onclick="updateQty(0,-1)">−</button>
-    <span id="q0">0</span>
-    <button onclick="updateQty(0,1)">+</button>
+    <button onclick="changeQty('dispenser',-1)">−</button>
+    <span id="dispenser">0</span>
+    <button onclick="changeQty('dispenser',1)">+</button>
   </div>
 </div>
 
@@ -117,14 +85,14 @@ h2{
   <div class="left">
     <img src="file_00000000af1472078bb4b0b0ecb777a3.png">
     <div>
-      <div class="name">Camper</div>
-      <div class="price">₹600</div>
+      <b>Camper</b>
+      <div>₹600</div>
     </div>
   </div>
   <div class="qty">
-    <button onclick="updateQty(1,-1)">−</button>
-    <span id="q1">0</span>
-    <button onclick="updateQty(1,1)">+</button>
+    <button onclick="changeQty('camper',-1)">−</button>
+    <span id="camper">0</span>
+    <button onclick="changeQty('camper',1)">+</button>
   </div>
 </div>
 
@@ -133,62 +101,68 @@ h2{
   <div class="left">
     <img src="cJtyGezw.webp">
     <div>
-      <div class="name">Jar</div>
-      <div class="price">₹250</div>
+      <b>Jar</b>
+      <div>₹250</div>
     </div>
   </div>
   <div class="qty">
-    <button onclick="updateQty(2,-1)">−</button>
-    <span id="q2">0</span>
-    <button onclick="updateQty(2,1)">+</button>
+    <button onclick="changeQty('jar',-1)">−</button>
+    <span id="jar">0</span>
+    <button onclick="changeQty('jar',1)">+</button>
   </div>
 </div>
 
+<button class="add-btn" onclick="addToCart()">Add to Cart</button>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- NAV -->
 <div class="bottom-nav">
-  <div onclick="location.href='index.html'">
-    <i class="fa-solid fa-house"></i>Home
-  </div>
-  <div class="active">
-    <i class="fa-solid fa-box"></i>Products
-  </div>
-  <div onclick="location.href='cart.html'">
-    <i class="fa-solid fa-cart-shopping"></i>Cart
-  </div>
-  <div>
-    <i class="fa-solid fa-fire"></i>Offers
-  </div>
-  <div>
-    <i class="fa-solid fa-user"></i>Profile
-  </div>
+<div onclick="location.href='index.html'"><i class="fa-solid fa-house"></i>Home</div>
+<div class="active"><i class="fa-solid fa-box"></i>Products</div>
+<div onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i>Cart</div>
+<div><i class="fa-solid fa-fire"></i>Offers</div>
+<div><i class="fa-solid fa-user"></i>Profile</div>
 </div>
 
 <script>
-let products = [
-  {title:"Dispenser", price:200, qty:0},
-  {title:"Camper", price:600, qty:0},
-  {title:"Jar", price:250, qty:0}
-];
+let qty = { dispenser:0, camper:0, jar:0 };
 
-let saved = JSON.parse(localStorage.getItem("pyasoCart")) || [];
+function changeQty(type,val){
+  qty[type]+=val;
+  if(qty[type]<0) qty[type]=0;
+  document.getElementById(type).innerText=qty[type];
+}
 
-products.forEach((p,i)=>{
-  let f = saved.find(x=>x.title===p.title);
-  if(f){
-    p.qty = f.qty;
-    document.getElementById("q"+i).innerText = p.qty;
+function addToCart(){
+  if(qty.dispenser==0 && qty.camper==0 && qty.jar==0){
+    alert("Please add quantity");
+    return;
   }
-});
 
-function updateQty(i,val){
-  products[i].qty += val;
-  if(products[i].qty < 0) products[i].qty = 0;
-  document.getElementById("q"+i).innerText = products[i].qty;
+  let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
 
-  let cart = products.filter(p=>p.qty>0);
-  localStorage.setItem("pyasoCart", JSON.stringify(cart));
+  const items = [
+    {title:"Dispenser", price:200, qty:qty.dispenser},
+    {title:"Camper", price:600, qty:qty.camper},
+    {title:"Jar", price:250, qty:qty.jar}
+  ];
+
+  items.forEach(item=>{
+    if(item.qty>0){
+      let found = cart.find(c=>c.title===item.title);
+      if(found){
+        found.qty+=item.qty;
+      }else{
+        cart.push(item);
+      }
+    }
+  });
+
+  localStorage.setItem("pyasoCart",JSON.stringify(cart));
+
+  // 👇 yaha control hai
+  location.href="index.html"; 
+  // cart.html chahiye to yaha cart.html likh do
 }
 </script>
 
