@@ -1,40 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Products</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-body{font-family:Arial;background:#f4f9ff;padding:15px}
-.card{background:#fff;border-radius:15px;padding:15px;margin:12px 0;
-display:flex;justify-content:space-between;align-items:center}
-button{padding:8px 12px;border:none;background:#2f80ed;color:#fff;border-radius:10px}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f7fb;
+}
+.container{
+  padding:16px;
+  padding-bottom:90px;
+}
+h2{
+  margin-bottom:16px;
+}
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 14px rgba(0,0,0,.06);
+}
+.left{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.left img{
+  width:56px;
+  height:56px;
+  object-fit:contain;
+  border-radius:12px;
+  background:#eef5ff;
+}
+.name{
+  font-weight:bold;
+  font-size:15px;
+}
+.price{
+  color:#555;
+  font-size:14px;
+}
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.qty button{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:none;
+  background:#eaf6ff;
+  font-size:18px;
+}
+.qty span{
+  min-width:18px;
+  text-align:center;
+}
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  border-top:1px solid #ddd;
+  padding:8px 0;
+}
+.bottom-nav div{
+  text-align:center;
+  font-size:12px;
+  color:#777;
+}
+.bottom-nav i{
+  font-size:18px;
+  display:block;
+}
+.active{color:#2f80ed;}
 </style>
 </head>
+
 <body>
 
+<div class="container">
 <h2>Products</h2>
 
+<!-- DISPENSER -->
 <div class="card">
-<div>Dispenser<br>₹200</div>
-<button onclick="add('Dispenser',200)">Add</button>
+  <div class="left">
+    <img src="file_00000000c05472079906499cc10f550a.png">
+    <div>
+      <div class="name">Dispenser</div>
+      <div class="price">₹200</div>
+    </div>
+  </div>
+  <div class="qty">
+    <button onclick="updateQty(0,-1)">−</button>
+    <span id="q0">0</span>
+    <button onclick="updateQty(0,1)">+</button>
+  </div>
 </div>
 
+<!-- CAMPER -->
 <div class="card">
-<div>Camper<br>₹600</div>
-<button onclick="add('Camper',600)">Add</button>
+  <div class="left">
+    <img src="file_00000000af1472078bb4b0b0ecb777a3.png">
+    <div>
+      <div class="name">Camper</div>
+      <div class="price">₹600</div>
+    </div>
+  </div>
+  <div class="qty">
+    <button onclick="updateQty(1,-1)">−</button>
+    <span id="q1">0</span>
+    <button onclick="updateQty(1,1)">+</button>
+  </div>
 </div>
 
+<!-- JAR -->
 <div class="card">
-<div>Jar<br>₹250</div>
-<button onclick="add('Jar',250)">Add</button>
+  <div class="left">
+    <img src="cJtyGezw.webp">
+    <div>
+      <div class="name">Jar</div>
+      <div class="price">₹250</div>
+    </div>
+  </div>
+  <div class="qty">
+    <button onclick="updateQty(2,-1)">−</button>
+    <span id="q2">0</span>
+    <button onclick="updateQty(2,1)">+</button>
+  </div>
+</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div onclick="location.href='index.html'">
+    <i class="fa-solid fa-house"></i>Home
+  </div>
+  <div class="active">
+    <i class="fa-solid fa-box"></i>Products
+  </div>
+  <div onclick="location.href='cart.html'">
+    <i class="fa-solid fa-cart-shopping"></i>Cart
+  </div>
+  <div>
+    <i class="fa-solid fa-fire"></i>Offers
+  </div>
+  <div>
+    <i class="fa-solid fa-user"></i>Profile
+  </div>
 </div>
 
 <script>
-function add(name,price){
-let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
-cart.push({title:name,price:price,qty:1});
-localStorage.setItem("pyasoCart",JSON.stringify(cart));
-alert("Added to cart");
+let products = [
+  {title:"Dispenser", price:200, qty:0},
+  {title:"Camper", price:600, qty:0},
+  {title:"Jar", price:250, qty:0}
+];
+
+let saved = JSON.parse(localStorage.getItem("pyasoCart")) || [];
+
+products.forEach((p,i)=>{
+  let f = saved.find(x=>x.title===p.title);
+  if(f){
+    p.qty = f.qty;
+    document.getElementById("q"+i).innerText = p.qty;
+  }
+});
+
+function updateQty(i,val){
+  products[i].qty += val;
+  if(products[i].qty < 0) products[i].qty = 0;
+  document.getElementById("q"+i).innerText = products[i].qty;
+
+  let cart = products.filter(p=>p.qty>0);
+  localStorage.setItem("pyasoCart", JSON.stringify(cart));
 }
 </script>
 
