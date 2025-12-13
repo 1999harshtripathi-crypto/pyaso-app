@@ -35,4 +35,22 @@ function loadCart() {
   });
 
   totalBox.innerText = "₹" + total;
+}<script>
+let qty = {one:0, weekly:0, monthly:0};
+
+function loadFromCart(){
+  let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
+
+  cart.forEach(item=>{
+    if(item.title==="1 Jar Refill") qty.one = item.qty;
+    if(item.title==="Weekly Refill") qty.weekly = item.qty;
+    if(item.title==="Monthly Refill") qty.monthly = item.qty;
+  });
+
+  document.getElementById("one").innerText = qty.one;
+  document.getElementById("weekly").innerText = qty.weekly;
+  document.getElementById("monthly").innerText = qty.monthly;
 }
+
+loadFromCart();   // 🔥 THIS LINE IS THE KEY
+</script>
