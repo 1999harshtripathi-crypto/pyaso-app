@@ -98,26 +98,41 @@ justify-content:space-around;border-top:1px solid #ddd;padding:8px 0}
 </div>
 
 <script>
-let qty={one:0,weekly:0,monthly:0};
+let qty = { one:0, weekly:0, monthly:0 };
 
 function changeQty(type,val){
-  qty[type]+=val;
-  if(qty[type]<0) qty[type]=0;
-  document.getElementById(type).innerText=qty[type];
+  qty[type] += val;
+  if(qty[type] < 0) qty[type] = 0;
+  document.getElementById(type).innerText = qty[type];
 }
 
 function addToCart(){
-if(qty.one==0 && qty.weekly==0 && qty.monthly==0){
-alert("Please add quantity");return;
-}
+  if(qty.one==0 && qty.weekly==0 && qty.monthly==0){
+    alert("Please add quantity");
+    return;
+  }
 
-localStorage.setItem("pyasoCart",JSON.stringify([
-{title:"1 Jar Refill",price:40,qty:qty.one},
-{title:"Weekly Refill",price:245,qty:qty.weekly},
-{title:"Monthly Refill",price:899,qty:qty.monthly}
-]));
+  let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
 
-location.href="cart.html";
+  const items = [
+    {title:"1 Jar Refill", price:40, qty:qty.one},
+    {title:"Weekly Refill", price:245, qty:qty.weekly},
+    {title:"Monthly Refill", price:899, qty:qty.monthly}
+  ];
+
+  items.forEach(item=>{
+    if(item.qty > 0){
+      let found = cart.find(c => c.title === item.title);
+      if(found){
+        found.qty += item.qty;
+      }else{
+        cart.push(item);
+      }
+    }
+  });
+
+  localStorage.setItem("pyasoCart", JSON.stringify(cart));
+  location.href = "cart.html";
 }
 </script>
 
