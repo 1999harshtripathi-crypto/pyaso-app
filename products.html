@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Products</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="script.js"></script>
-  <style>
-    body { font-family: sans-serif; background:#eef7ff; padding:20px; }
-    .card {
-      background:#fff; border-radius:16px; padding:12px;
-      display:flex; gap:12px; margin-bottom:16px;
-      align-items:center;
-    }
-    img { width:70px; height:70px; border-radius:12px; }
-    button {
-      margin-left:auto;
-      background:#2f80ed; color:#fff;
-      border:none; padding:8px 14px;
-      border-radius:8px;
-    }
-  </style>
+<title>Products</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial;background:#f4f9ff;padding:15px}
+.card{background:#fff;border-radius:15px;padding:15px;margin:12px 0;
+display:flex;justify-content:space-between;align-items:center}
+button{padding:8px 12px;border:none;background:#2f80ed;color:#fff;border-radius:10px}
+</style>
 </head>
 <body>
 
 <h2>Products</h2>
 
 <div class="card">
-  <img src="file_00000000c05472079906499cc10f550a.png">
-  <div>
-    <b>Dispenser</b><br>₹200
-  </div>
-  <button onclick="addToCart('Dispenser',200,'file_00000000c05472079906499cc10f550a.png')">Add</button>
+<div>Dispenser<br>₹200</div>
+<button onclick="add('Dispenser',200)">Add</button>
 </div>
 
 <div class="card">
-  <img src="file_00000000af1472078bb4b0b0ecb777a3.png">
-  <div>
-    <b>Camper</b><br>₹600
-  </div>
-  <button onclick="addToCart('Camper',600,'file_00000000af1472078bb4b0b0ecb777a3.png')">Add</button>
+<div>Camper<br>₹600</div>
+<button onclick="add('Camper',600)">Add</button>
 </div>
 
 <div class="card">
-  <img src="cJtyGezw.webp">
-  <div>
-    <b>Jar</b><br>₹250
-  </div>
-  <button onclick="addToCart('Jar',250,'cJtyGezw.webp')">Add</button>
+<div>Jar<br>₹250</div>
+<button onclick="add('Jar',250)">Add</button>
 </div>
+
+<script>
+function add(name,price){
+let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
+cart.push({title:name,price:price,qty:1});
+localStorage.setItem("pyasoCart",JSON.stringify(cart));
+alert("Added to cart");
+}
+</script>
 
 </body>
 </html>
