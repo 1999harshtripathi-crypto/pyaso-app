@@ -10,41 +10,31 @@ body{
   margin:0;
   font-family:system-ui;
   background:#f4f7fb;
-  padding-bottom:90px;
+  padding-bottom:140px;
 }
-.app{
-  max-width:420px;
-  margin:auto;
-  padding:12px;
-}
+.app{max-width:420px;margin:auto;padding:12px}
 .header{
   background:linear-gradient(135deg,#0a7cff,#22c1ff);
-  color:#fff;
-  border-radius:16px;
-  padding:16px;
+  color:#fff;border-radius:16px;padding:16px
 }
 .card{
-  background:#fff;
-  border-radius:16px;
-  padding:14px;
-  margin-top:14px;
+  background:#fff;border-radius:16px;
+  padding:14px;margin-top:14px
 }
 .item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:10px 0;
+  display:flex;justify-content:space-between;
+  align-items:center;margin:10px 0
 }
 button{
-  background:#0a7cff;
-  color:#fff;
-  border:none;
-  padding:10px 14px;
-  border-radius:12px;
+  background:#0a7cff;color:#fff;
+  border:none;padding:10px 16px;
+  border-radius:12px
 }
 .cart-bar{
   position:fixed;
-  bottom:0;
+  bottom:56px; /* 👈 bottom nav ke upar */
+  left:50%;
+  transform:translateX(-50%);
   width:100%;
   max-width:420px;
   background:#1faa00;
@@ -54,6 +44,17 @@ button{
   justify-content:space-between;
   align-items:center;
   font-weight:600;
+  z-index:10;
+}
+.bottom-nav{
+  position:fixed;
+  bottom:0;width:100%;
+  max-width:420px;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:8px 0;
+  border-top:1px solid #ddd;
 }
 </style>
 </head>
@@ -68,76 +69,59 @@ button{
 
 <div class="card">
   <h3>💧 Refill Water</h3>
-  <div class="item">
-    <span>10L – ₹25</span>
-    <button onclick="addToCart('Refill 10L',25)">Add</button>
-  </div>
-  <div class="item">
-    <span>20L – ₹40</span>
-    <button onclick="addToCart('Refill 20L',40)">Add</button>
-  </div>
-  <div class="item">
-    <span>30L – ₹55</span>
-    <button onclick="addToCart('Refill 30L',55)">Add</button>
-  </div>
+  <div class="item"><span>10L – ₹25</span><button onclick="add('Refill 10L',25)">Add</button></div>
+  <div class="item"><span>20L – ₹40</span><button onclick="add('Refill 20L',40)">Add</button></div>
+  <div class="item"><span>30L – ₹55</span><button onclick="add('Refill 30L',55)">Add</button></div>
 </div>
 
 <div class="card">
   <h3>🫙 Buy Jar / Bottle</h3>
-  <div class="item">
-    <span>16L Jar – ₹600</span>
-    <button onclick="addToCart('16L Jar',600)">Add</button>
-  </div>
-  <div class="item">
-    <span>20L Bottle – ₹250</span>
-    <button onclick="addToCart('20L Bottle',250)">Add</button>
-  </div>
+  <div class="item"><span>16L Jar – ₹600</span><button onclick="add('16L Jar',600)">Add</button></div>
+  <div class="item"><span>20L Bottle – ₹250</span><button onclick="add('20L Bottle',250)">Add</button></div>
 </div>
 
 <div class="card">
   <h3>📦 Subscription</h3>
-  <div class="item">
-    <span>30 Bottles – ₹900</span>
-    <button onclick="addToCart('Subscription 30',900)">Add</button>
-  </div>
+  <div class="item"><span>30 Bottles – ₹900</span><button onclick="add('Sub 30 Bottle',900)">Add</button></div>
+  <div class="item"><span>15 Bottles – ₹35/bottle</span><button onclick="add('Sub 15 Bottle',525)">Add</button></div>
+  <div class="item"><span>7 Bottles – ₹37/bottle</span><button onclick="add('Sub 7 Bottle',259)">Add</button></div>
 </div>
 
 <div class="card">
   <h3>🚚 Bulk Order</h3>
-  <div class="item">
-    <span>10 Can – ₹35/can</span>
-    <button onclick="addToCart('Bulk 10 Can',350)">Add</button>
-  </div>
+  <div class="item"><span>10 Can – ₹35/can</span><button onclick="add('Bulk 10 Can',350)">Add</button></div>
+  <div class="item"><span>20 Can – ₹30/can</span><button onclick="add('Bulk 20 Can',600)">Add</button></div>
 </div>
 
 </div>
 
-<div class="cart-bar" onclick="openCart()">
-  <span id="cartCount">0 items</span>
+<div class="cart-bar" onclick="goCart()">
+  <span id="count">0 items</span>
   <span>View Cart ➜</span>
 </div>
 
+<div class="bottom-nav">
+  <div>🏠<br>Home</div>
+  <div>🔁<br>Order Again</div>
+  <div>👤<br>Profile</div>
+</div>
+
 <script>
-function addToCart(name,price){
-  let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
-  let item = cart.find(i => i.name === name);
+function add(name,price){
+  let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
+  let item=cart.find(i=>i.name===name);
   if(item) item.qty++;
   else cart.push({name,price,qty:1});
   localStorage.setItem("pyasoCart",JSON.stringify(cart));
-  updateBar();
+  update();
 }
-
-function updateBar(){
-  let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
-  let count = cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById("cartCount").innerText = count+" items";
+function update(){
+  let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
+  let total=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById("count").innerText=total+" items";
 }
-
-function openCart(){
-  window.location.href="cart.html";
-}
-
-updateBar();
+function goCart(){location.href="cart.html"}
+update();
 </script>
 
 </body>
