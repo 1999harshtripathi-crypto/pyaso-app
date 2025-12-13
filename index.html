@@ -8,106 +8,110 @@
 </head>
 
 <body>
-  <div class="app">
+<div class="app">
 
-    <!-- HEADER -->
-    <header class="header">
-      <div>
-        <h1>PYASO</h1>
-        <p>45 min water delivery</p>
-      </div>
-      <span class="city">Lucknow</span>
-    </header>
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <h1>PYASO</h1>
+      <p>45 min water delivery</p>
+    </div>
+    <span class="city">Lucknow</span>
+  </header>
 
-    <!-- SERVICE INFO -->
-    <div class="info-bar">
-      ⏰ Service: 8:00 AM – 11:00 PM
+  <!-- SERVICE INFO -->
+  <div class="info-bar">
+    ⏰ Service: 8:00 AM – 11:00 PM
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="grid">
+
+    <div class="card">
+      <h3>💧 Refill Water</h3>
+      <p>10L ₹25 | 20L ₹40 | 30L ₹55</p>
+      <button onclick="openRefill()">Select</button>
     </div>
 
-    <!-- ACTIONS -->
-    <div class="grid">
-
-      <div class="card">
-        <h3>💧 Refill Water</h3>
-        <p>10L ₹25 | 20L ₹40 | 30L ₹55</p>
-        <button onclick="openPage('refill')">Select</button>
-      </div>
-
-      <div class="card">
-        <h3>🫙 Buy Jar / Bottle</h3>
-        <p>Jar & Bottle available</p>
-        <button onclick="openPage('jar')">Select</button>
-      </div>
-
-      <div class="card">
-        <h3>🔁 Subscription</h3>
-        <p>Weekly / Monthly plans</p>
-        <button onclick="openPage('subscription')">Select</button>
-      </div>
-
-      <div class="card">
-        <h3>🎉 Bulk Order</h3>
-        <p>Marriage / Party</p>
-        <button onclick="openPage('bulk')">Select</button>
-      </div>
-
+    <div class="card">
+      <h3>🫙 Buy Jar / Bottle</h3>
+      <p>Jar & Bottle available</p>
+      <button onclick="alert('Jar & Bottle – Coming Next')">Select</button>
     </div>
 
-    <!-- INSTANT -->
-    <div class="instant">
-      🚀 Need water fast? Get delivery in 45 minutes
-      <button onclick="openPage('instant')">Instant Order</button>
+    <div class="card">
+      <h3>🔁 Subscription</h3>
+      <p>Weekly / Monthly plans</p>
+      <button onclick="alert('Subscription – Coming Next')">Select</button>
+    </div>
+
+    <div class="card">
+      <h3>🎉 Bulk Order</h3>
+      <p>Marriage / Party</p>
+      <button onclick="alert('Bulk Order – Coming Next')">Select</button>
     </div>
 
   </div>
 
-  <!-- JAVASCRIPT -->
-  <script>
-    function openPage(type) {
+  <!-- INSTANT -->
+  <div class="instant">
+    🚀 Need water fast? Get delivery in 45 minutes
+    <button onclick="alert('Instant delivery in 45 minutes')">Instant Order</button>
+  </div>
 
-      if (type === 'refill') {
-        alert(
-          "REFILL WATER\n\n" +
-          "10L  = ₹25\n" +
-          "20L  = ₹40\n" +
-          "30L  = ₹55"
-        );
-      }
+  <!-- CART -->
+  <div id="cart" style="display:none; margin-top:20px; background:#fff; padding:15px; border-radius:16px;">
+    <h3>🛒 Your Cart</h3>
 
-      else if (type === 'jar') {
-        alert(
-          "BUY JAR / BOTTLE\n\n" +
-          "16L Jar = ₹600\n" +
-          "20L Bottle = ₹250"
-        );
-      }
+    <p><strong>Refill Water - 20L</strong></p>
+    <p>Price per can: ₹40</p>
 
-      else if (type === 'subscription') {
-        alert(
-          "SUBSCRIPTION PLANS\n\n" +
-          "30 Bottles = ₹900\n" +
-          "7 Bottles  = ₹37 per bottle\n" +
-          "15 Bottles = ₹35 per bottle"
-        );
-      }
+    <div style="display:flex; gap:10px; align-items:center;">
+      <button onclick="decreaseQty()">−</button>
+      <span id="qty">1</span>
+      <button onclick="increaseQty()">+</button>
+    </div>
 
-      else if (type === 'bulk') {
-        alert(
-          "BULK ORDER\n\n" +
-          "10 Can  = ₹35 / can\n" +
-          "20 Can  = ₹30 / can\n" +
-          "40 Can  = ₹25 / can"
-        );
-      }
+    <hr>
 
-      else if (type === 'instant') {
-        alert(
-          "INSTANT DELIVERY 🚀\n\n" +
-          "Water delivered within 45 minutes"
-        );
-      }
-    }
-  </script>
+    <p><strong>Total: ₹<span id="total">40</span></strong></p>
+
+    <button onclick="goToPayment()">Proceed to Payment</button>
+  </div>
+
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+let price = 40;
+let quantity = 1;
+
+function openRefill() {
+  document.getElementById("cart").style.display = "block";
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+function increaseQty() {
+  quantity++;
+  updateTotal();
+}
+
+function decreaseQty() {
+  if (quantity > 1) {
+    quantity--;
+    updateTotal();
+  }
+}
+
+function updateTotal() {
+  document.getElementById("qty").innerText = quantity;
+  document.getElementById("total").innerText = price * quantity;
+}
+
+function goToPayment() {
+  alert("Next Step: Payment Screen (COD / UPI)");
+}
+</script>
 
 </body>
 </html>
