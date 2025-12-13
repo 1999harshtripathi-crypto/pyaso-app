@@ -2,212 +2,147 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PYASO – Quick Water Delivery</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>PYASO – Water Delivery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {
-  margin: 0;
+body{
+  margin:0;
   font-family: Arial, sans-serif;
-  background: #f4f7fb;
+  background:#f4f7fb;
 }
-.app {
-  max-width: 420px;
-  margin: auto;
-  padding: 15px;
+.page{display:none;padding:16px}
+.active{display:block}
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:14px;
 }
-.hidden { display: none; }
-
-.header {
-  background: linear-gradient(135deg,#007bff,#00c6ff);
-  color: #fff;
-  padding: 20px;
-  border-radius: 16px;
+h2{margin:6px 0}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#0b7cff;
+  color:#fff;
+  font-size:16px;
 }
-.city {
-  float: right;
-  background: rgba(255,255,255,0.2);
-  padding: 6px 12px;
-  border-radius: 20px;
+.small{font-size:14px;color:#666}
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  margin:6px 0;
 }
-.card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 15px;
-  margin-top: 12px;
-}
-.option {
-  margin: 8px 0;
-}
-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  background: #007bff;
-  color: #fff;
-  font-size: 16px;
-  margin-top: 12px;
-}
-.secondary {
-  background: #ff8c00;
-}
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  margin: 6px 0;
-}
-.total {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 10px;
-}
-input[type=text], select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-.center {
-  text-align: center;
-}
-.success {
-  font-size: 20px;
-  color: green;
+input[type=radio]{margin-right:8px}
+header{
+  background:linear-gradient(135deg,#0b7cff,#22b2ff);
+  color:#fff;
+  padding:18px;
+  border-radius:0 0 22px 22px;
 }
 </style>
 </head>
-
 <body>
-<div class="app">
 
-<!-- ================= HOME PAGE ================= -->
-<div id="homePage">
-
-  <div class="header">
-    <span class="city">Lucknow</span>
-    <h1>PYASO</h1>
-    <p>45 min water delivery</p>
-  </div>
-
+<!-- LOGIN -->
+<div class="page active" id="login">
+  <h2>Login</h2>
   <div class="card">
-    <h3>💧 Refill Water</h3>
-    <div class="option"><input type="checkbox" data-name="10L Refill" data-price="25"> 10L – ₹25</div>
-    <div class="option"><input type="checkbox" data-name="20L Refill" data-price="40"> 20L – ₹40</div>
-    <div class="option"><input type="checkbox" data-name="30L Refill" data-price="55"> 30L – ₹55</div>
-  </div>
-
-  <div class="card">
-    <h3>🫙 Buy Jar / Bottle</h3>
-    <div class="option"><input type="checkbox" data-name="16L Jar" data-price="600"> 16L Jar – ₹600</div>
-    <div class="option"><input type="checkbox" data-name="20L Bottle" data-price="250"> 20L Bottle – ₹250</div>
-  </div>
-
-  <div class="card">
-    <h3>🔁 Subscription</h3>
-    <div class="option"><input type="checkbox" data-name="30 Bottles Monthly" data-price="900"> 30 Bottles – ₹900</div>
-    <div class="option"><input type="checkbox" data-name="7 Bottles" data-price="259"> 7 Bottles</div>
-    <div class="option"><input type="checkbox" data-name="15 Bottles" data-price="525"> 15 Bottles</div>
-  </div>
-
-  <div class="card">
-    <h3>🎉 Bulk Order</h3>
-    <div class="option"><input type="checkbox" data-name="10 Cans Bulk" data-price="350"> 10 Cans</div>
-    <div class="option"><input type="checkbox" data-name="20 Cans Bulk" data-price="600"> 20 Cans</div>
-    <div class="option"><input type="checkbox" data-name="40 Cans Bulk" data-price="1000"> 40 Cans</div>
-  </div>
-
-  <button onclick="goToCart()">Go to Cart</button>
-</div>
-
-<!-- ================= CART PAGE ================= -->
-<div id="cartPage" class="hidden">
-  <div class="card">
-    <h3>🛒 Your Cart</h3>
-    <div id="cartItems"></div>
-    <div class="total">Total: ₹<span id="totalAmount">0</span></div>
-    <button onclick="goToPayment()">Proceed to Payment</button>
+    <input placeholder="Mobile Number" style="width:100%;padding:12px">
+    <br><br>
+    <button onclick="go('home')">Login</button>
   </div>
 </div>
 
-<!-- ================= PAYMENT PAGE ================= -->
-<div id="paymentPage" class="hidden">
-  <div class="card">
-    <h3>💳 Payment</h3>
+<!-- HOME -->
+<div class="page" id="home">
+<header>
+  <h2>PYASO</h2>
+  <div class="small">45 min water delivery</div>
+</header>
 
-    <input type="text" placeholder="Full Name">
-    <input type="text" placeholder="Mobile Number">
-    <input type="text" placeholder="Delivery Address">
-
-    <select>
-      <option>Select Payment Method</option>
-      <option>UPI</option>
-      <option>Cash on Delivery</option>
-    </select>
-
-    <button class="secondary" onclick="confirmOrder()">Pay & Place Order</button>
-  </div>
+<div class="card">
+<h3>Refill Water</h3>
+<label><input type="radio" name="refill" onclick="addItem('10L Refill',25)">10L – ₹25</label><br>
+<label><input type="radio" name="refill" onclick="addItem('20L Refill',40)">20L – ₹40</label><br>
+<label><input type="radio" name="refill" onclick="addItem('30L Refill',55)">30L – ₹55</label>
 </div>
 
-<!-- ================= CONFIRM PAGE ================= -->
-<div id="confirmPage" class="hidden center">
-  <div class="card">
-    <p class="success">✅ Order Confirmed!</p>
-    <p>Your water will be delivered within <b>45 minutes</b></p>
-    <p>Thank you for choosing <b>PYASO</b></p>
-  </div>
+<div class="card">
+<h3>Buy Jar / Bottle</h3>
+<label><input type="radio" name="jar" onclick="addItem('16L Jar',600)">16L Jar – ₹600</label><br>
+<label><input type="radio" name="jar" onclick="addItem('20L Bottle',250)">20L Bottle – ₹250</label>
 </div>
 
+<div class="card">
+<h3>Subscription</h3>
+<button onclick="addItem('30 Bottle Plan',900)">30 Bottle – ₹900</button>
+</div>
+
+<div class="card">
+<h3>Bulk Order</h3>
+<button onclick="addItem('10 Can Bulk',350)">10 Can – ₹35/can</button>
+</div>
+
+<button onclick="go('cart')">Go to Cart</button>
+</div>
+
+<!-- CART -->
+<div class="page" id="cart">
+<h2>Your Cart</h2>
+<div class="card" id="cartItems"></div>
+<h3 id="total"></h3>
+<button onclick="go('payment')">Proceed to Payment</button>
+</div>
+
+<!-- PAYMENT -->
+<div class="page" id="payment">
+<h2>Payment</h2>
+<div class="card">
+<button onclick="go('confirm')">Pay ₹<span id="payAmount"></span></button>
+</div>
+</div>
+
+<!-- CONFIRM -->
+<div class="page" id="confirm">
+<h2>Order Confirmed 🎉</h2>
+<div class="card">
+<p>Your water is on the way 🚚</p>
+<button onclick="go('success')">Track Order</button>
+</div>
+</div>
+
+<!-- SUCCESS -->
+<div class="page" id="success">
+<h2>Delivered ✅</h2>
+<video width="100%" controls>
+<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+</video>
 </div>
 
 <script>
-let selectedItems = [];
-let total = 0;
-
-function goToCart() {
-  selectedItems = [];
-  total = 0;
-
-  document.querySelectorAll('input[type=checkbox]:checked').forEach(item => {
-    let price = parseInt(item.dataset.price);
-    selectedItems.push({ name: item.dataset.name, price });
-    total += price;
-  });
-
-  if (selectedItems.length === 0) {
-    alert("Please select at least one item");
-    return;
-  }
-
-  let cartDiv = document.getElementById("cartItems");
-  cartDiv.innerHTML = "";
-  selectedItems.forEach(i => {
-    cartDiv.innerHTML += `
-      <div class="cart-item">
-        <span>${i.name}</span>
-        <span>₹${i.price}</span>
-      </div>`;
-  });
-
-  document.getElementById("totalAmount").innerText = total;
-
-  showPage("cartPage");
+let cart=[];
+function go(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ if(id=='cart') renderCart();
+ if(id=='payment') document.getElementById('payAmount').innerText=total();
 }
-
-function goToPayment() {
-  showPage("paymentPage");
+function addItem(name,price){
+ cart.push({name,price});
+ alert(name+" added");
 }
-
-function confirmOrder() {
-  showPage("confirmPage");
+function renderCart(){
+ let html='';
+ cart.forEach(i=>{
+  html+=`<div class="cart-item"><span>${i.name}</span><span>₹${i.price}</span></div>`;
+ });
+ document.getElementById('cartItems').innerHTML=html;
+ document.getElementById('total').innerText="Total ₹"+total();
 }
-
-function showPage(pageId) {
-  ["homePage","cartPage","paymentPage","confirmPage"].forEach(id => {
-    document.getElementById(id).classList.add("hidden");
-  });
-  document.getElementById(pageId).classList.remove("hidden");
+function total(){
+ return cart.reduce((s,i)=>s+i.price,0);
 }
 </script>
 
