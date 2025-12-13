@@ -1,140 +1,206 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>PYASO – Water Delivery</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont;
   background:#f4f7fb;
 }
-header{
-  background:linear-gradient(135deg,#0b7cff,#22b2ff);
-  color:#fff;
-  padding:20px;
-  border-radius:0 0 22px 22px;
+.app{
+  max-width:420px;
+  margin:auto;
+  padding:12px;
 }
-.card{
-  background:#fff;
-  margin:14px;
+.header{
+  background:linear-gradient(135deg,#0a7cff,#1fb6ff);
+  color:#fff;
   padding:16px;
   border-radius:16px;
+}
+.header h1{margin:0}
+.card{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  margin-top:12px;
 }
 .item{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   margin:8px 0;
 }
 button{
-  width:100%;
-  padding:14px;
+  background:#0a7cff;
   border:none;
-  border-radius:12px;
-  background:#0b7cff;
   color:#fff;
-  font-size:16px;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:14px;
 }
-.cart{
-  position:fixed;
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.qty button{
+  width:36px;
+  height:36px;
+  padding:0;
+}
+.footer{
+  position:sticky;
   bottom:0;
-  width:100%;
   background:#fff;
   padding:12px;
-  box-shadow:0 -2px 10px rgba(0,0,0,.1);
+  border-top:1px solid #ddd;
 }
-.small{color:#666;font-size:14px}
+.big{
+  width:100%;
+  font-size:16px;
+  padding:14px;
+}
 </style>
 </head>
 
 <body>
+<div class="app">
 
-<header>
-  <h2>PYASO</h2>
-  <div class="small">45 min water delivery</div>
-</header>
+  <!-- HEADER -->
+  <div class="header">
+    <h1>PYASO</h1>
+    <div>45 min water delivery</div>
+  </div>
 
-<!-- REFILL -->
-<div class="card">
-<h3>💧 Refill Water</h3>
-<div class="item">
-<span>10L – ₹25</span>
-<button onclick="add('10L Refill',25)">Add</button>
-</div>
-<div class="item">
-<span>20L – ₹40</span>
-<button onclick="add('20L Refill',40)">Add</button>
-</div>
-<div class="item">
-<span>30L – ₹55</span>
-<button onclick="add('30L Refill',55)">Add</button>
-</div>
+  <!-- REFILL -->
+  <div class="card">
+    <h3>💧 Refill Water</h3>
+    <div class="item">
+      <span>10L – ₹25</span>
+      <div class="qty">
+        <button onclick="add('10L Refill',25)">Add</button>
+      </div>
+    </div>
+    <div class="item">
+      <span>20L – ₹40</span>
+      <button onclick="add('20L Refill',40)">Add</button>
+    </div>
+    <div class="item">
+      <span>30L – ₹55</span>
+      <button onclick="add('30L Refill',55)">Add</button>
+    </div>
+  </div>
+
+  <!-- JAR -->
+  <div class="card">
+    <h3>🫙 Buy Jar / Bottle</h3>
+    <div class="item">
+      <span>16L Jar – ₹600</span>
+      <button onclick="add('16L Jar',600)">Add</button>
+    </div>
+    <div class="item">
+      <span>20L Bottle – ₹250</span>
+      <button onclick="add('20L Bottle',250)">Add</button>
+    </div>
+  </div>
+
+  <!-- SUBSCRIPTION -->
+  <div class="card">
+    <h3>📦 Subscription</h3>
+    <div class="item">
+      <span>30 Bottles – ₹900</span>
+      <button onclick="add('30 Bottle Plan',900)">Add</button>
+    </div>
+    <div class="item">
+      <span>15 Bottles – ₹35 / bottle</span>
+      <button onclick="add('15 Bottle Plan',525)">Add</button>
+    </div>
+    <div class="item">
+      <span>7 Bottles – ₹37 / bottle</span>
+      <button onclick="add('7 Bottle Plan',259)">Add</button>
+    </div>
+  </div>
+
+  <!-- BULK -->
+  <div class="card">
+    <h3>🎉 Bulk Order</h3>
+    <div class="item">
+      <span>10 Cans – ₹35 / can</span>
+      <button onclick="add('10 Can Bulk',350)">Add</button>
+    </div>
+    <div class="item">
+      <span>20 Cans – ₹30 / can</span>
+      <button onclick="add('20 Can Bulk',600)">Add</button>
+    </div>
+    <div class="item">
+      <span>40 Cans – ₹25 / can</span>
+      <button onclick="add('40 Can Bulk',1000)">Add</button>
+    </div>
+  </div>
+
+  <!-- CART -->
+  <div class="card">
+    <h3>🛒 Your Cart</h3>
+    <div id="cart"></div>
+  </div>
+
 </div>
 
-<!-- JAR -->
-<div class="card">
-<h3>🫙 Buy Jar / Bottle</h3>
-<div class="item">
-<span>16L Jar – ₹600</span>
-<button onclick="add('16L Jar',600)">Add</button>
-</div>
-<div class="item">
-<span>20L Bottle – ₹250</span>
-<button onclick="add('20L Bottle',250)">Add</button>
-</div>
-</div>
-
-<!-- SUBSCRIPTION -->
-<div class="card">
-<h3>📦 Subscription</h3>
-<div class="item">
-<span>30 Bottles – ₹900</span>
-<button onclick="add('Subscription 30 Bottle',900)">Add</button>
-</div>
-</div>
-
-<!-- BULK -->
-<div class="card">
-<h3>🚛 Bulk Order</h3>
-<div class="item">
-<span>10 Can – ₹35/can</span>
-<button onclick="add('Bulk 10 Can',350)">Add</button>
-</div>
-</div>
-
-<!-- CART -->
-<div class="cart">
-<div id="cartItems" class="small">Cart empty</div>
-<h3>Total: ₹<span id="total">0</span></h3>
-<button onclick="pay()">Proceed to Payment</button>
+<div class="footer">
+  <h3>Total: ₹<span id="total">0</span></h3>
+  <button class="big" onclick="pay()">Proceed to Payment</button>
 </div>
 
 <script>
-let cart=[];
-let total=0;
+let cart={};
 
 function add(name,price){
- cart.push({name,price});
- total+=price;
- render();
+  if(!cart[name]){
+    cart[name]={price:price,qty:1};
+  }else{
+    cart[name].qty++;
+  }
+  render();
+}
+
+function change(name,val){
+  cart[name].qty+=val;
+  if(cart[name].qty<=0) delete cart[name];
+  render();
 }
 
 function render(){
- let html='';
- cart.forEach(i=>{
-  html+=`• ${i.name} – ₹${i.price}<br>`;
- });
- document.getElementById('cartItems').innerHTML=html;
- document.getElementById('total').innerText=total;
+  let html='',total=0;
+  for(let i in cart){
+    let p=cart[i].price*cart[i].qty;
+    total+=p;
+    html+=`
+    <div class="item">
+      <div>
+        <b>${i}</b><br>₹${cart[i].price}
+      </div>
+      <div class="qty">
+        <button onclick="change('${i}',-1)">−</button>
+        ${cart[i].qty}
+        <button onclick="change('${i}',1)">+</button>
+      </div>
+    </div>`;
+  }
+  document.getElementById('cart').innerHTML=html||"Cart empty";
+  document.getElementById('total').innerText=total;
 }
 
 function pay(){
- alert("Payment Successful ✅\nOrder Confirmed 🚚");
- cart=[];
- total=0;
- render();
+  if(Object.keys(cart).length==0){
+    alert("Cart empty");
+    return;
+  }
+  alert("Payment Successful ✅\nOrder Confirmed 🚚");
 }
 </script>
 
