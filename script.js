@@ -1,25 +1,38 @@
-let jar=0, weekly=0, monthly=0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function changeJar(v){
-  jar=Math.max(0,jar+v);
-  document.getElementById("jarQty").innerText=jar;
-  document.getElementById("jarPrice").innerText =
-    jar>0 ? "₹"+(jar*40) : "";
+// ADD ITEM
+function addToCart(name, price, img) {
+  const item = cart.find(i => i.name === name);
+
+  if (item) {
+    item.qty += 1;
+  } else {
+    cart.push({ name, price, img, qty: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(name + " added to cart");
 }
 
-function changeWeekly(v){
-  weekly=Math.max(0,weekly+v);
-  document.getElementById("weeklyQty").innerText=weekly;
-}
+// LOAD CART
+function loadCart() {
+  const list = document.getElementById("cart-items");
+  const totalBox = document.getElementById("total");
+  list.innerHTML = "";
+  let total = 0;
 
-function changeMonthly(v){
-  monthly=Math.max(0,monthly+v);
-  document.getElementById("monthlyQty").innerText=monthly;
-}
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    list.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.img}">
+        <div>
+          <b>${item.name}</b><br>
+          ₹${item.price} × ${item.qty}
+        </div>
+      </div>
+    `;
+  });
 
-function goToCart(){
-  localStorage.setItem("jar",jar);
-  localStorage.setItem("weekly",weekly);
-  localStorage.setItem("monthly",monthly);
-  location.href="cart.html";
+  totalBox.innerText = "₹" + total;
 }
