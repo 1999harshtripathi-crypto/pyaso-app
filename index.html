@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PYASO – Water Delivery</title>
 
 <style>
 body{
   margin:0;
-  font-family:system-ui, -apple-system;
-  background:#f4f7fb;
+  font-family:system-ui,-apple-system;
+  background:#f1f5f4;
+  background-image:
+    linear-gradient(#e3ecea 1px, transparent 1px),
+    linear-gradient(90deg,#e3ecea 1px, transparent 1px);
+  background-size:40px 40px;
   padding-bottom:140px;
 }
+
 .container{max-width:420px;margin:auto;padding:12px}
 
 /* HEADER */
-.header{
-  text-align:center;
-  padding:20px 10px;
-}
-.logo{
-  width:120px;
-  margin:auto;
-  display:block;
-}
-.tagline{color:#555;font-size:14px}
+.header{text-align:center;padding:20px 10px}
+.logo{width:120px}
+.tagline{font-size:14px;color:#444}
 
 /* CARD */
 .card{
   background:#fff;
-  border-radius:16px;
+  border-radius:18px;
   padding:14px;
   margin-top:14px;
 }
-.card h3{margin:0 0 10px 0}
+.card h3{margin:0 0 12px}
 
-/* ITEM ROW */
+/* ITEM */
 .item{
   display:flex;
   justify-content:space-between;
@@ -44,32 +42,27 @@ body{
 }
 .item span{font-size:15px}
 
-/* ADD BUTTON */
-.add-btn{
-  background:#0a7cff;
-  color:#fff;
-  border:none;
-  padding:6px 14px;
-  border-radius:20px;
-}
-
 /* QTY */
 .qty{
   display:flex;
   align-items:center;
-  gap:6px;
+  gap:8px;
 }
 .qty button{
-  width:28px;
-  height:28px;
+  width:32px;height:32px;
   border:none;
   background:#0a7cff;
   color:#fff;
-  border-radius:8px;
+  font-size:18px;
+  border-radius:10px;
 }
-.qty span{min-width:16px;text-align:center}
+.qty span{
+  min-width:18px;
+  text-align:center;
+  font-weight:600;
+}
 
-/* FLOATING CART */
+/* CART BAR */
 .cart-bar{
   position:fixed;
   bottom:64px;
@@ -78,8 +71,8 @@ body{
   width:92%;
   background:#18a118;
   color:#fff;
-  padding:12px;
-  border-radius:14px;
+  padding:12px 16px;
+  border-radius:16px;
   display:none;
   justify-content:space-between;
   align-items:center;
@@ -88,7 +81,7 @@ body{
   background:#fff;
   color:#18a118;
   border:none;
-  padding:6px 12px;
+  padding:6px 14px;
   border-radius:20px;
 }
 
@@ -114,56 +107,39 @@ body{
 
   <!-- HEADER -->
   <div class="header">
-    <img src="Screenshot_20251213-164914~2.png" class="logo" alt="PYASO">
+    <img src="Screenshot_20251213-164914~2.png" class="logo">
     <div class="tagline">45 min water delivery</div>
   </div>
 
   <!-- REFILL -->
   <div class="card">
     <h3>💧 Refill Water</h3>
-    <div class="item">
-      <span>10L – ₹25</span>
-      <div class="qty" data-name="10L Refill" data-price="25"></div>
-    </div>
-    <div class="item">
-      <span>20L – ₹40</span>
-      <div class="qty" data-name="20L Refill" data-price="40"></div>
-    </div>
-    <div class="item">
-      <span>30L – ₹55</span>
-      <div class="qty" data-name="30L Refill" data-price="55"></div>
-    </div>
+    <div class="item"><span>10L – ₹25</span><div class="qty" data-name="10L Refill" data-price="25"></div></div>
+    <div class="item"><span>20L – ₹40</span><div class="qty" data-name="20L Refill" data-price="40"></div></div>
+    <div class="item"><span>30L – ₹55</span><div class="qty" data-name="30L Refill" data-price="55"></div></div>
   </div>
 
   <!-- JAR -->
   <div class="card">
     <h3>🫙 Buy Jar / Bottle</h3>
-    <div class="item">
-      <span>16L Jar – ₹600</span>
-      <div class="qty" data-name="16L Jar" data-price="600"></div>
-    </div>
-    <div class="item">
-      <span>20L Bottle – ₹250</span>
-      <div class="qty" data-name="20L Bottle" data-price="250"></div>
-    </div>
+    <div class="item"><span>16L Jar – ₹600</span><div class="qty" data-name="16L Jar" data-price="600"></div></div>
+    <div class="item"><span>20L Bottle – ₹250</span><div class="qty" data-name="20L Bottle" data-price="250"></div></div>
   </div>
 
   <!-- SUBSCRIPTION -->
   <div class="card">
     <h3>📦 Subscription</h3>
-    <div class="item">
-      <span>30 Bottles – ₹900</span>
-      <div class="qty" data-name="30 Bottle Plan" data-price="900"></div>
-    </div>
+    <div class="item"><span>7 Bottles – ₹37/bottle</span><div class="qty" data-name="7 Bottle Plan" data-price="259"></div></div>
+    <div class="item"><span>15 Bottles – ₹35/bottle</span><div class="qty" data-name="15 Bottle Plan" data-price="525"></div></div>
+    <div class="item"><span>30 Bottles – ₹900</span><div class="qty" data-name="30 Bottle Plan" data-price="900"></div></div>
   </div>
 
   <!-- BULK -->
   <div class="card">
     <h3>🚚 Bulk Order</h3>
-    <div class="item">
-      <span>10 Can – ₹35/can</span>
-      <div class="qty" data-name="10 Can Bulk" data-price="350"></div>
-    </div>
+    <div class="item"><span>10 Can – ₹35/can</span><div class="qty" data-name="Bulk 10 Can" data-price="350"></div></div>
+    <div class="item"><span>20 Can – ₹30/can</span><div class="qty" data-name="Bulk 20 Can" data-price="600"></div></div>
+    <div class="item"><span>40 Can – ₹25/can</span><div class="qty" data-name="Bulk 40 Can" data-price="1000"></div></div>
   </div>
 
 </div>
@@ -171,10 +147,10 @@ body{
 <!-- CART BAR -->
 <div class="cart-bar" id="cartBar">
   <div id="cartInfo">0 items | ₹0</div>
-  <button onclick="goCart()">View Cart</button>
+  <button onclick="location.href='cart.html'">View Cart</button>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- NAV -->
 <div class="nav">
   <div><span>🏠</span>Home</div>
   <div><span>💰</span>Wallet</div>
@@ -186,41 +162,35 @@ body{
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-document.querySelectorAll(".qty").forEach(box=>{
-  const name = box.dataset.name;
-  const price = Number(box.dataset.price);
+document.querySelectorAll(".qty").forEach(q=>{
+  const name=q.dataset.name, price=Number(q.dataset.price);
+  q.innerHTML=`<button>-</button><span>0</span><button>+</button>`;
+  const [minus,count,plus]=q.children;
 
-  box.innerHTML = `
-    <button>-</button>
-    <span>0</span>
-    <button>+</button>
-  `;
-
-  const minus = box.children[0];
-  const count = box.children[1];
-  const plus  = box.children[2];
-
-  plus.onclick = ()=>{
-    cart[name] = cart[name] || {qty:0,price};
+  plus.onclick=()=>{
+    cart[name]=cart[name]||{qty:0,price};
     cart[name].qty++;
-    count.innerText = cart[name].qty;
-    updateCart();
+    count.textContent=cart[name].qty;
+    update();
   };
-
-  minus.onclick = ()=>{
+  minus.onclick=()=>{
     if(cart[name]?.qty>0){
       cart[name].qty--;
-      count.innerText = cart[name].qty;
+      count.textContent=cart[name].qty;
       if(cart[name].qty===0) delete cart[name];
-      updateCart();
+      update();
     }
   };
 });
 
-function updateCart(){
+function update(){
   let items=0,total=0;
-  for(let k in cart){
-    items+=cart[k].qty;
-    total+=cart[k].qty*cart[k].price;
-  }
-  localStorage
+  for(let k in cart){items+=cart[k].qty;total+=cart[k].qty*cart[k].price;}
+  localStorage.setItem("cart",JSON.stringify(cart));
+  document.getElementById("cartBar").style.display=items?"flex":"none";
+  document.getElementById("cartInfo").innerText=`${items} items | ₹${total}`;
+}
+</script>
+
+</body>
+</html>
