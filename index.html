@@ -6,61 +6,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="app">
 
-<div class="app">
+    <!-- HEADER -->
+    <header class="header">
+      <div>
+        <h1>PYASO</h1>
+        <p>45 min water delivery</p>
+      </div>
+      <span class="city">Lucknow</span>
+    </header>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div>
-      <h1>PYASO</h1>
-      <p>45 min water delivery</p>
+    <!-- SERVICE INFO -->
+    <div class="info-bar">
+      ⏰ Service: 8:00 AM – 11:00 PM
     </div>
-    <span class="city">Lucknow</span>
-  </header>
 
-  <!-- SERVICE INFO -->
-  <div class="info-bar">
-    🕗 Service: 8:00 AM – 11:00 PM
+    <!-- ACTIONS -->
+    <div class="grid">
+
+      <div class="card">
+        <h3>💧 Refill Water</h3>
+        <p>10L ₹25 | 20L ₹40 | 30L ₹55</p>
+        <button onclick="openPage('refill')">Select</button>
+      </div>
+
+      <div class="card">
+        <h3>🫙 Buy Jar / Bottle</h3>
+        <p>Jar & Bottle available</p>
+        <button onclick="openPage('jar')">Select</button>
+      </div>
+
+      <div class="card">
+        <h3>🔁 Subscription</h3>
+        <p>Weekly / Monthly plans</p>
+        <button onclick="openPage('subscription')">Select</button>
+      </div>
+
+      <div class="card">
+        <h3>🎉 Bulk Order</h3>
+        <p>Marriage / Party</p>
+        <button onclick="openPage('bulk')">Select</button>
+      </div>
+
+    </div>
+
+    <!-- INSTANT -->
+    <div class="instant">
+      🚀 Need water fast? Get delivery in 45 minutes
+      <button onclick="openPage('instant')">Instant Order</button>
+    </div>
+
   </div>
 
-  <!-- QUICK ACTIONS -->
-  <div class="grid">
+  <!-- JAVASCRIPT -->
+  <script>
+    function openPage(type) {
 
-    <div class="card">
-      <h3>💧 Refill Water</h3>
-      <p>10L ₹25 | 20L ₹40 | 30L ₹55</p>
-      <button>Select</button>
-    </div>
+      if (type === 'refill') {
+        alert(
+          "REFILL WATER\n\n" +
+          "10L  = ₹25\n" +
+          "20L  = ₹40\n" +
+          "30L  = ₹55"
+        );
+      }
 
-    <div class="card">
-      <h3>🫙 Buy Jar / Bottle</h3>
-      <p>Jar & Bottle available</p>
-      <button>Select</button>
-    </div>
+      else if (type === 'jar') {
+        alert(
+          "BUY JAR / BOTTLE\n\n" +
+          "16L Jar = ₹600\n" +
+          "20L Bottle = ₹250"
+        );
+      }
 
-    <div class="card">
-      <h3>🔁 Subscription</h3>
-      <p>Weekly / Monthly plans</p>
-      <button>Select</button>
-    </div>
+      else if (type === 'subscription') {
+        alert(
+          "SUBSCRIPTION PLANS\n\n" +
+          "30 Bottles = ₹900\n" +
+          "7 Bottles  = ₹37 per bottle\n" +
+          "15 Bottles = ₹35 per bottle"
+        );
+      }
 
-    <div class="card">
-      <h3>🎉 Bulk Order</h3>
-      <p>Marriage / Party</p>
-      <button>Select</button>
-    </div>
+      else if (type === 'bulk') {
+        alert(
+          "BULK ORDER\n\n" +
+          "10 Can  = ₹35 / can\n" +
+          "20 Can  = ₹30 / can\n" +
+          "40 Can  = ₹25 / can"
+        );
+      }
 
-  </div>
-
-  <!-- INSTANT DELIVERY -->
-  <div class="instant">
-    🚀 Need water fast?
-    <strong>Get delivery in 45 minutes</strong>
-    <button>Instant Order</button>
-  </div>
-
-</div>
+      else if (type === 'instant') {
+        alert(
+          "INSTANT DELIVERY 🚀\n\n" +
+          "Water delivered within 45 minutes"
+        );
+      }
+    }
+  </script>
 
 </body>
 </html>
