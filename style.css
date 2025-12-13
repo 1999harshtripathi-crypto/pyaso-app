@@ -1,10 +1,11 @@
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#fff;
-  padding-bottom:80px;
+  font-family:Arial, sans-serif;
+  background:#ffffff;
+  padding-bottom:90px;
 }
 
+/* HEADER */
 .header{
   background:linear-gradient(180deg,#9fd6ff,#ffffff);
   text-align:center;
@@ -15,11 +16,21 @@ body{
 
 .logo{
   width:80px;
+  background:transparent;
+  mix-blend-mode:multiply;
 }
 
-.header h1{margin:10px 0;color:#0f2a44}
-.header p{color:#4b6b88}
+.header h1{
+  margin:10px 0 0;
+  color:#0f2a44;
+}
 
+.header p{
+  color:#4b6b88;
+  margin-top:6px;
+}
+
+/* CARD */
 .card{
   background:#fff;
   margin:15px;
@@ -36,10 +47,33 @@ body{
 }
 
 .icon{
-  font-size:26px;
   background:#eaf4ff;
   padding:12px;
   border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.jar-logo{
+  width:32px;
+}
+
+/* TEXT */
+.text h3{
+  margin:0;
+  color:#0f2a44;
+}
+
+.text small{
+  color:#4b6b88;
+  font-weight:bold;
+}
+
+/* QTY */
+.qty{
+  display:flex;
+  align-items:center;
 }
 
 .qty button{
@@ -55,11 +89,7 @@ body{
   font-weight:bold;
 }
 
-.price{
-  font-weight:bold;
-  font-size:18px;
-}
-
+/* TAG */
 .tag{
   position:absolute;
   top:-10px;
@@ -71,8 +101,11 @@ body{
   border-radius:10px;
 }
 
-.orange{background:#ff7a18}
+.orange{
+  background:#ff7a18;
+}
 
+/* BUTTON */
 .checkout button{
   width:90%;
   margin:20px 5%;
@@ -84,6 +117,7 @@ body{
   border-radius:20px;
 }
 
+/* BOTTOM NAV */
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -103,4 +137,11 @@ body{
   text-decoration:none;
 }
 
-.bottom-nav .active{color:#2f80ed}
+.bottom-nav span{
+  display:block;
+  font-size:11px;
+}
+
+.bottom-nav .active{
+  color:#2f80ed;
+}
