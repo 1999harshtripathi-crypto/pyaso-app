@@ -16,25 +16,19 @@ body {
   margin: auto;
   padding: 15px;
 }
+.hidden { display: none; }
+
 .header {
   background: linear-gradient(135deg,#007bff,#00c6ff);
   color: #fff;
   padding: 20px;
   border-radius: 16px;
 }
-.header h1 { margin: 0; }
 .city {
   float: right;
   background: rgba(255,255,255,0.2);
   padding: 6px 12px;
   border-radius: 20px;
-}
-.info {
-  margin: 12px 0;
-  background: #eaf1ff;
-  padding: 10px;
-  border-radius: 12px;
-  text-align: center;
 }
 .card {
   background: #fff;
@@ -53,13 +47,10 @@ button {
   background: #007bff;
   color: #fff;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
-.cart {
-  margin-top: 15px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 16px;
+.secondary {
+  background: #ff8c00;
 }
 .cart-item {
   display: flex;
@@ -71,11 +62,28 @@ button {
   font-weight: bold;
   margin-top: 10px;
 }
+input[type=text], select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.center {
+  text-align: center;
+}
+.success {
+  font-size: 20px;
+  color: green;
+}
 </style>
 </head>
 
 <body>
 <div class="app">
+
+<!-- ================= HOME PAGE ================= -->
+<div id="homePage">
 
   <div class="header">
     <span class="city">Lucknow</span>
@@ -83,9 +91,6 @@ button {
     <p>45 min water delivery</p>
   </div>
 
-  <div class="info">⏰ Service: 8:00 AM – 11:00 PM</div>
-
-  <!-- REFILL -->
   <div class="card">
     <h3>💧 Refill Water</h3>
     <div class="option"><input type="checkbox" data-name="10L Refill" data-price="25"> 10L – ₹25</div>
@@ -93,64 +98,116 @@ button {
     <div class="option"><input type="checkbox" data-name="30L Refill" data-price="55"> 30L – ₹55</div>
   </div>
 
-  <!-- JAR -->
   <div class="card">
     <h3>🫙 Buy Jar / Bottle</h3>
     <div class="option"><input type="checkbox" data-name="16L Jar" data-price="600"> 16L Jar – ₹600</div>
     <div class="option"><input type="checkbox" data-name="20L Bottle" data-price="250"> 20L Bottle – ₹250</div>
   </div>
 
-  <!-- SUBSCRIPTION -->
   <div class="card">
     <h3>🔁 Subscription</h3>
     <div class="option"><input type="checkbox" data-name="30 Bottles Monthly" data-price="900"> 30 Bottles – ₹900</div>
-    <div class="option"><input type="checkbox" data-name="7 Bottles" data-price="259"> 7 Bottles – ₹37 each</div>
-    <div class="option"><input type="checkbox" data-name="15 Bottles" data-price="525"> 15 Bottles – ₹35 each</div>
+    <div class="option"><input type="checkbox" data-name="7 Bottles" data-price="259"> 7 Bottles</div>
+    <div class="option"><input type="checkbox" data-name="15 Bottles" data-price="525"> 15 Bottles</div>
   </div>
 
-  <!-- BULK -->
   <div class="card">
     <h3>🎉 Bulk Order</h3>
-    <div class="option"><input type="checkbox" data-name="10 Cans Bulk" data-price="350"> 10 Cans – ₹35/can</div>
-    <div class="option"><input type="checkbox" data-name="20 Cans Bulk" data-price="600"> 20 Cans – ₹30/can</div>
-    <div class="option"><input type="checkbox" data-name="40 Cans Bulk" data-price="1000"> 40 Cans – ₹25/can</div>
+    <div class="option"><input type="checkbox" data-name="10 Cans Bulk" data-price="350"> 10 Cans</div>
+    <div class="option"><input type="checkbox" data-name="20 Cans Bulk" data-price="600"> 20 Cans</div>
+    <div class="option"><input type="checkbox" data-name="40 Cans Bulk" data-price="1000"> 40 Cans</div>
   </div>
 
-  <button onclick="updateCart()">Add Selected to Cart</button>
+  <button onclick="goToCart()">Go to Cart</button>
+</div>
 
-  <!-- CART -->
-  <div class="cart">
+<!-- ================= CART PAGE ================= -->
+<div id="cartPage" class="hidden">
+  <div class="card">
     <h3>🛒 Your Cart</h3>
     <div id="cartItems"></div>
-    <div class="total">Total: ₹<span id="total">0</span></div>
-    <button onclick="pay()">Proceed to Payment</button>
+    <div class="total">Total: ₹<span id="totalAmount">0</span></div>
+    <button onclick="goToPayment()">Proceed to Payment</button>
   </div>
+</div>
+
+<!-- ================= PAYMENT PAGE ================= -->
+<div id="paymentPage" class="hidden">
+  <div class="card">
+    <h3>💳 Payment</h3>
+
+    <input type="text" placeholder="Full Name">
+    <input type="text" placeholder="Mobile Number">
+    <input type="text" placeholder="Delivery Address">
+
+    <select>
+      <option>Select Payment Method</option>
+      <option>UPI</option>
+      <option>Cash on Delivery</option>
+    </select>
+
+    <button class="secondary" onclick="confirmOrder()">Pay & Place Order</button>
+  </div>
+</div>
+
+<!-- ================= CONFIRM PAGE ================= -->
+<div id="confirmPage" class="hidden center">
+  <div class="card">
+    <p class="success">✅ Order Confirmed!</p>
+    <p>Your water will be delivered within <b>45 minutes</b></p>
+    <p>Thank you for choosing <b>PYASO</b></p>
+  </div>
+</div>
 
 </div>
 
 <script>
-function updateCart() {
-  let items = document.querySelectorAll('input[type=checkbox]:checked');
-  let cart = document.getElementById("cartItems");
-  let total = 0;
-  cart.innerHTML = "";
+let selectedItems = [];
+let total = 0;
 
-  items.forEach(item => {
+function goToCart() {
+  selectedItems = [];
+  total = 0;
+
+  document.querySelectorAll('input[type=checkbox]:checked').forEach(item => {
     let price = parseInt(item.dataset.price);
+    selectedItems.push({ name: item.dataset.name, price });
     total += price;
-    cart.innerHTML += `
-      <div class="cart-item">
-        <span>${item.dataset.name}</span>
-        <span>₹${price}</span>
-      </div>
-    `;
   });
 
-  document.getElementById("total").innerText = total;
+  if (selectedItems.length === 0) {
+    alert("Please select at least one item");
+    return;
+  }
+
+  let cartDiv = document.getElementById("cartItems");
+  cartDiv.innerHTML = "";
+  selectedItems.forEach(i => {
+    cartDiv.innerHTML += `
+      <div class="cart-item">
+        <span>${i.name}</span>
+        <span>₹${i.price}</span>
+      </div>`;
+  });
+
+  document.getElementById("totalAmount").innerText = total;
+
+  showPage("cartPage");
 }
 
-function pay() {
-  alert("Payment + Delivery flow next step 🚀");
+function goToPayment() {
+  showPage("paymentPage");
+}
+
+function confirmOrder() {
+  showPage("confirmPage");
+}
+
+function showPage(pageId) {
+  ["homePage","cartPage","paymentPage","confirmPage"].forEach(id => {
+    document.getElementById(id).classList.add("hidden");
+  });
+  document.getElementById(pageId).classList.remove("hidden");
 }
 </script>
 
