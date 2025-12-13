@@ -1,181 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PYASO</title>
-
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#eaf6f6;
-}
-
-/* HEADER */
-.header{
-  text-align:center;
-  padding:20px;
-}
-.header img{
-  width:120px;
-  border-radius:16px;
-}
-.header p{margin:4px;color:#555}
-
-/* PRODUCT LIST */
-.container{padding:16px}
-.product{
-  background:#ffffffcc;
-  border-radius:14px;
-  padding:12px;
-  display:flex;
-  gap:12px;
-  align-items:center;
-  margin-bottom:14px;
-  cursor:pointer;
-}
-.product img{
-  width:80px;
-  height:80px;
-  object-fit:contain;
-  background:#fff;
-  border-radius:10px;
-}
-
-/* POPUP */
-.overlay{
-  position:fixed;
-  top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,0.4);
-  display:none;
-}
-.popup{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  border-radius:20px 20px 0 0;
-  padding:20px;
-}
-.popup img{
-  width:120px;
-  display:block;
-  margin:auto;
-}
-.qty{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin:14px 0;
-}
-.btn{
-  width:40px;height:40px;
-  border:none;
-  border-radius:10px;
-  background:#1e88e5;
-  color:#fff;
-  font-size:22px;
-}
-.buy{
-  width:100%;
-  padding:14px;
-  background:#2e7d32;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  font-size:18px;
-}
-
-/* NAV */
-.nav{
-  position:fixed;
-  bottom:0;
-  left:0;right:0;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  border-top:1px solid #ccc;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="header">
-  <img src="Screenshot_20251213-180537~2.png">
-  <h2>PYASO</h2>
+<div class="hero">
+  <img src="Screenshot_20251213-180537~2.png" class="logo">
+  <h1>PYASO</h1>
   <p>45 min water delivery</p>
 </div>
 
-<div class="container">
-
-  <div class="product" onclick="openPopup('Dispenser','₹200','file_00000000c05472079906499cc10f550a.png')">
-    <img src="file_00000000c05472079906499cc10f550a.png">
-    <div>
-      <h3>Dispenser</h3>
-      <b>₹200</b>
-    </div>
-  </div>
-
-  <div class="product" onclick="openPopup('Camper','₹600','file_00000000af1472078bb4b0b0ecb777a3.png')">
-    <img src="file_00000000af1472078bb4b0b0ecb777a3.png">
-    <div>
-      <h3>Camper</h3>
-      <b>₹600</b>
-    </div>
-  </div>
-
-  <div class="product" onclick="openPopup('Jar','₹250','cJtyGezw.webp')">
-    <img src="cJtyGezw.webp">
-    <div>
-      <h3>Jar</h3>
-      <b>₹250</b>
-    </div>
-  </div>
-
+<div class="card" onclick="location.href='products.html'">
+  <h3>🛒 Products</h3>
+  <p>Dispenser · Camper · Jar</p>
 </div>
 
-<!-- POPUP -->
-<div class="overlay" id="overlay" onclick="closePopup()"></div>
-
-<div class="popup" id="popup">
-  <img id="pImg">
-  <h2 id="pName" align="center"></h2>
-  <p id="pPrice" align="center"></p>
-
-  <div class="qty">
-    <button class="btn">−</button>
-    <span>1</span>
-    <button class="btn">+</button>
-  </div>
-
-  <button class="buy">Add to Cart</button>
+<div class="bottom-nav">
+  <span class="active">Home</span>
+  <span onclick="location.href='products.html'">Products</span>
+  <span>Cart</span>
+  <span>Offers</span>
+  <span>Profile</span>
 </div>
-
-<div class="nav">
-  <span>🏠 Home</span>
-  <span>💰 Wallet</span>
-  <span>🛒 Cart</span>
-  <span>🔥 Offers</span>
-  <span>👤 Profile</span>
-</div>
-
-<script>
-function openPopup(name, price, img){
-  document.getElementById("pName").innerText = name;
-  document.getElementById("pPrice").innerText = price;
-  document.getElementById("pImg").src = img;
-  document.getElementById("overlay").style.display="block";
-  document.getElementById("popup").style.display="block";
-}
-function closePopup(){
-  document.getElementById("overlay").style.display="none";
-  document.getElementById("popup").style.display="none";
-}
-</script>
 
 </body>
 </html>
