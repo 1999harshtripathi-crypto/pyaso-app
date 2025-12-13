@@ -1,127 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PYASO</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-body{margin:0;font-family:Arial;background:linear-gradient(#bfe5ff,#f7fbff)}
-.container{padding:20px;padding-bottom:90px;text-align:center}
-.logo-img{width:90px;mix-blend-mode:multiply}
-h1{margin:10px 0 4px;font-size:28px}
-.tagline{color:#2b3a4a}
-.card{background:#fff;border-radius:18px;padding:15px;margin:16px 0;
-box-shadow:0 8px 18px rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center}
-.left{display:flex;gap:12px;text-align:left}
-.icon{width:44px;height:44px;background:#eaf6ff;border-radius:50%;
-display:flex;align-items:center;justify-content:center}
-.label{background:orange;color:#fff;font-size:11px;padding:3px 8px;border-radius:10px;margin-bottom:4px;display:inline-block}
-.qty{display:flex;align-items:center;gap:8px}
-.qty button{width:36px;height:36px;border-radius:50%;border:none;background:#eaf6ff;font-size:18px}
-.go-cart{width:100%;padding:14px;background:#2f80ed;color:#fff;border:none;border-radius:14px;font-size:16px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;
-justify-content:space-around;border-top:1px solid #ddd;padding:8px 0}
-.bottom-nav div{text-align:center;font-size:12px;color:#777}
-.bottom-nav i{font-size:18px;display:block}
-.active{color:#2f80ed}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PYASO</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<div class="container">
 
-<img src="Screenshot_20251213-180537~2.png" class="logo-img">
-<h1>PYASO</h1>
-<div class="tagline">Water to your 🚪</div>
+  <!-- HEADER -->
+  <div class="header">
+    <img src="logo.png" class="logo" />
+    <h1>PYASO</h1>
+    <p>Water to your 🚪</p>
+  </div>
 
-<!-- ONE TIME -->
-<div class="card">
-<div class="left">
-<div class="icon">💧</div>
-<div>
-<b>1 Jar Refill</b>
-<div>₹40 per jar (one-time)</div>
-</div>
-</div>
-<div class="qty">
-<button onclick="qty.one--">−</button>
-<span id="oneQty">0</span>
-<button onclick="qty.one++">+</button>
-</div>
-</div>
+  <!-- PRODUCTS -->
+  <div class="container">
 
-<!-- WEEKLY -->
-<div class="card">
-<div class="left">
-<div>
-<div class="label">WEEKLY</div>
-<b>Weekly Refill</b>
-<div>7 jars / week · ₹245</div>
-</div>
-</div>
-<div class="qty">
-<button onclick="qty.weekly--">−</button>
-<span id="weeklyQty">0</span>
-<button onclick="qty.weekly++">+</button>
-</div>
-</div>
+    <!-- 1 JAR -->
+    <div class="card">
+      <div class="icon">
+        <img src="logo.png" />
+      </div>
 
-<!-- MONTHLY -->
-<div class="card">
-<div class="left">
-<div>
-<div class="label">MONTHLY</div>
-<b>Monthly Refill</b>
-<div>30 jars / month · ₹899</div>
-</div>
-</div>
-<div class="qty">
-<button onclick="qty.monthly--">−</button>
-<span id="monthlyQty">0</span>
-<button onclick="qty.monthly++">+</button>
-</div>
-</div>
+      <div class="info">
+        <h3>1 Jar</h3>
+      </div>
 
-<button class="go-cart" onclick="addToCart()">Add to Cart</button>
-</div>
+      <div class="qty">
+        <button>-</button>
+        <span>0</span>
+        <button>+</button>
+      </div>
+    </div>
 
-<!-- NAV -->
-<div class="bottom-nav">
-<div class="active"><i class="fa-solid fa-house"></i>Home</div>
-<div onclick="location.href='products.html'"><i class="fa-solid fa-box"></i>Products</div>
-<div onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i>Cart</div>
-<div><i class="fa-solid fa-fire"></i>Offers</div>
-<div><i class="fa-solid fa-user"></i>Profile</div>
-</div>
+    <!-- WEEKLY -->
+    <span class="tag weekly">WEEKLY</span>
+    <div class="card">
+      <div class="icon calendar">
+        📅
+      </div>
 
-<script>
-let qty={one:0,weekly:0,monthly:0};
+      <div class="info">
+        <h3>Weekly</h3>
+        <p>₹245 / month</p>
+      </div>
 
-setInterval(()=>{
-  if(qty.one<0)qty.one=0;
-  if(qty.weekly<0)qty.weekly=0;
-  if(qty.monthly<0)qty.monthly=0;
-  oneQty.innerText=qty.one;
-  weeklyQty.innerText=qty.weekly;
-  monthlyQty.innerText=qty.monthly;
-},100);
+      <div class="qty">
+        <button>-</button>
+        <span>0</span>
+        <button>+</button>
+      </div>
+    </div>
 
-function addToCart(){
-if(qty.one==0 && qty.weekly==0 && qty.monthly==0){
-alert("Please add quantity");return;
-}
+    <!-- MONTHLY -->
+    <span class="tag monthly">MONTHLY</span>
+    <div class="card">
+      <div class="icon calendar">
+        📅
+      </div>
 
-localStorage.setItem("pyasoCart",JSON.stringify({
-one:{qty:qty.one,price:40},
-weekly:{qty:qty.weekly,price:245},
-monthly:{qty:qty.monthly,price:899}
-}));
+      <div class="info">
+        <h3>Monthly</h3>
+        <p>₹899 / month</p>
+      </div>
 
-location.href="cart.html";
-}
-</script>
+      <div class="qty">
+        <button>-</button>
+        <span>0</span>
+        <button>+</button>
+      </div>
+    </div>
+
+    <button class="cart-btn">Go to Cart</button>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <span>🏠<br>Home</span>
+    <span>💼<br>Wallet</span>
+    <span>🛒<br>Cart</span>
+    <span>🔥<br>Offers</span>
+    <span>👤<br>Profile</span>
+  </div>
 
 </body>
 </html>
