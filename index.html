@@ -6,89 +6,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  box-sizing:border-box;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont;
-}
-
 body{
   margin:0;
-  padding-bottom:130px;
-  background-color:#eaf7f6;
-  background-image:
-    linear-gradient(#dff1ef 1px, transparent 1px),
-    linear-gradient(90deg, #dff1ef 1px, transparent 1px);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  background:
+    linear-gradient(#eaf6f5 1px, transparent 1px),
+    linear-gradient(90deg, #eaf6f5 1px, transparent 1px);
   background-size:40px 40px;
+  padding-bottom:120px;
 }
 
-/* APP */
 .app{
   max-width:420px;
   margin:auto;
-  padding:14px;
-}
-
-/* LOGO */
-.logo{
-  text-align:center;
-  margin:20px 0 16px;
-}
-.logo img{
-  width:140px;
-  background:#fff;
-  border-radius:16px;
-  padding:10px;
-}
-.logo p{
-  margin:6px 0 0;
-  color:#444;
-}
-
-/* CARD */
-.card{
-  background:rgba(255,255,255,0.65);
-  backdrop-filter:blur(6px);
-  border-radius:18px;
   padding:16px;
-  margin-bottom:14px;
 }
 
-/* HEAD */
+.logo-box{
+  text-align:center;
+  background:#ffffffaa;
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:16px;
+}
+
+.logo-box img{
+  width:140px;
+}
+
+.subtitle{
+  color:#555;
+  margin-top:6px;
+}
+
+.card{
+  background:#ffffffcc;
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:16px;
+}
+
 .card h3{
-  margin:0 0 12px;
-  font-size:18px;
+  margin:0 0 10px;
+  display:flex;
+  gap:8px;
+  align-items:center;
 }
 
-/* ITEM */
 .item{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:12px 0;
-  font-size:15px;
+  margin:10px 0;
 }
 
-/* QTY */
 .qty{
   display:flex;
   align-items:center;
   gap:8px;
 }
+
 .qty button{
   width:36px;
   height:36px;
   border:none;
-  border-radius:10px;
-  background:#1a73e8;
+  background:#0a7cff;
   color:#fff;
-  font-size:18px;
-}
-.qty span{
-  min-width:16px;
-  text-align:center;
+  font-size:20px;
+  border-radius:10px;
 }
 
-/* CART BAR */
+.qty span{
+  min-width:20px;
+  text-align:center;
+  font-weight:600;
+}
+
 .cart-bar{
   position:fixed;
   bottom:64px;
@@ -96,17 +89,15 @@ body{
   width:100%;
   background:#2e7d32;
   color:#fff;
-  padding:14px;
   display:flex;
   justify-content:space-between;
+  padding:14px 18px;
   font-weight:600;
 }
 
-/* BOTTOM NAV */
 .bottom-nav{
   position:fixed;
   bottom:0;
-  left:0;
   width:100%;
   background:#fff;
   border-top:1px solid #ddd;
@@ -114,9 +105,10 @@ body{
   justify-content:space-around;
   padding:8px 0;
 }
+
 .bottom-nav div{
-  text-align:center;
   font-size:12px;
+  text-align:center;
 }
 </style>
 </head>
@@ -126,10 +118,9 @@ body{
 <div class="app">
 
   <!-- LOGO -->
-  <div class="logo">
-    <!-- 👇 yaha sirf image ka naam change hota hai -->
-    <img src="Screenshot_20251213-180537~2.png">
-    <p>45 min water delivery</p>
+  <div class="logo-box">
+    <img src="Screenshot_20251213-180537~2.png" alt="PYASO Logo">
+    <div class="subtitle">45 min water delivery</div>
   </div>
 
   <!-- REFILL -->
@@ -137,52 +128,52 @@ body{
     <h3>💧 Refill Water</h3>
 
     <div class="item">
-      10L – ₹25
+      <div>10L – ₹25</div>
       <div class="qty">
-        <button onclick="dec(0)">−</button>
+        <button onclick="changeQty(0,-1)">-</button>
         <span id="q0">0</span>
-        <button onclick="inc(0)">+</button>
+        <button onclick="changeQty(0,1)">+</button>
       </div>
     </div>
 
     <div class="item">
-      20L – ₹40
+      <div>20L – ₹40</div>
       <div class="qty">
-        <button onclick="dec(1)">−</button>
+        <button onclick="changeQty(1,-1)">-</button>
         <span id="q1">0</span>
-        <button onclick="inc(1)">+</button>
+        <button onclick="changeQty(1,1)">+</button>
       </div>
     </div>
 
     <div class="item">
-      30L – ₹55
+      <div>30L – ₹55</div>
       <div class="qty">
-        <button onclick="dec(2)">−</button>
+        <button onclick="changeQty(2,-1)">-</button>
         <span id="q2">0</span>
-        <button onclick="inc(2)">+</button>
+        <button onclick="changeQty(2,1)">+</button>
       </div>
     </div>
   </div>
 
-  <!-- BUY -->
+  <!-- JAR -->
   <div class="card">
     <h3>🫙 Buy Jar / Bottle</h3>
 
     <div class="item">
-      16L Jar – ₹600
+      <div>16L Jar – ₹600</div>
       <div class="qty">
-        <button onclick="dec(3)">−</button>
+        <button onclick="changeQty(3,-1)">-</button>
         <span id="q3">0</span>
-        <button onclick="inc(3)">+</button>
+        <button onclick="changeQty(3,1)">+</button>
       </div>
     </div>
 
     <div class="item">
-      20L Bottle – ₹250
+      <div>20L Bottle – ₹250</div>
       <div class="qty">
-        <button onclick="dec(4)">−</button>
+        <button onclick="changeQty(4,-1)">-</button>
         <span id="q4">0</span>
-        <button onclick="inc(4)">+</button>
+        <button onclick="changeQty(4,1)">+</button>
       </div>
     </div>
   </div>
@@ -192,29 +183,29 @@ body{
     <h3>📦 Subscription</h3>
 
     <div class="item">
-      7 Bottles – ₹37/bottle
+      <div>7 Bottles – ₹37/bottle</div>
       <div class="qty">
-        <button onclick="dec(5)">−</button>
+        <button onclick="changeQty(5,-1)">-</button>
         <span id="q5">0</span>
-        <button onclick="inc(5)">+</button>
+        <button onclick="changeQty(5,1)">+</button>
       </div>
     </div>
 
     <div class="item">
-      15 Bottles – ₹35/bottle
+      <div>15 Bottles – ₹35/bottle</div>
       <div class="qty">
-        <button onclick="dec(6)">−</button>
+        <button onclick="changeQty(6,-1)">-</button>
         <span id="q6">0</span>
-        <button onclick="inc(6)">+</button>
+        <button onclick="changeQty(6,1)">+</button>
       </div>
     </div>
 
     <div class="item">
-      30 Bottles – ₹900
+      <div>30 Bottles – ₹900</div>
       <div class="qty">
-        <button onclick="dec(7)">−</button>
+        <button onclick="changeQty(7,-1)">-</button>
         <span id="q7">0</span>
-        <button onclick="inc(7)">+</button>
+        <button onclick="changeQty(7,1)">+</button>
       </div>
     </div>
   </div>
@@ -223,8 +214,8 @@ body{
 
 <!-- CART BAR -->
 <div class="cart-bar">
-  <span id="items">0 items</span>
-  <span>₹<span id="total">0</span></span>
+  <div id="items">0 items</div>
+  <div id="total">₹0</div>
 </div>
 
 <!-- BOTTOM NAV -->
@@ -237,26 +228,23 @@ body{
 </div>
 
 <script>
-let price=[25,40,55,600,250,37,35,900];
-let qty=[0,0,0,0,0,0,0,0];
+const prices=[25,40,55,600,250,37,35,900];
+const qty=Array(8).fill(0);
 
-function inc(i){
-  qty[i]++;
-  update();
+function changeQty(i,d){
+  qty[i]=Math.max(0,qty[i]+d);
+  document.getElementById("q"+i).innerText=qty[i];
+  updateCart();
 }
-function dec(i){
-  if(qty[i]>0) qty[i]--;
-  update();
-}
-function update(){
+
+function updateCart(){
   let items=0,total=0;
-  for(let i=0;i<qty.length;i++){
-    document.getElementById("q"+i).innerText=qty[i];
-    items+=qty[i];
-    total+=qty[i]*price[i];
-  }
+  qty.forEach((q,i)=>{
+    items+=q;
+    total+=q*prices[i];
+  });
   document.getElementById("items").innerText=items+" items";
-  document.getElementById("total").innerText=total;
+  document.getElementById("total").innerText="₹"+total;
 }
 </script>
 
