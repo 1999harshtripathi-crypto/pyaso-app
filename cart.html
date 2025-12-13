@@ -1,70 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Your Cart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{margin:0;font-family:system-ui;background:#f4f7fb;padding-bottom:80px}
-.app{max-width:420px;margin:auto;padding:12px}
-.card{background:#fff;border-radius:16px;padding:14px;margin-top:12px}
-.item{display:flex;justify-content:space-between;align-items:center;margin:10px 0}
-.qty{display:flex;gap:8px;align-items:center}
-.qty button{width:32px;height:32px;background:#0a7cff;color:#fff;border:none;border-radius:8px}
-.pay{width:100%;padding:14px;background:#0a7cff;color:#fff;border:none;border-radius:14px}
-.bottom-nav{position:fixed;bottom:0;width:100%;max-width:420px;
-background:#fff;display:flex;justify-content:space-around;
-padding:8px 0;border-top:1px solid #ddd}
-</style>
+  <title>Cart</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<div class="app">
-<h2>🛒 Your Cart</h2>
 
-<div class="card" id="list"></div>
+<div class="header">
+  <h1>My Cart</h1>
+</div>
 
 <div class="card">
-  <h3>Total: ₹<span id="total">0</span></h3>
-  <button class="pay">Proceed to Payment</button>
-</div>
-</div>
-
-<div class="bottom-nav">
-  <div onclick="home()">🏠<br>Home</div>
-  <div>🔁<br>Order Again</div>
-  <div>👤<br>Profile</div>
+  <h3>1 Jar</h3>
+  <p>Total: ₹40</p>
 </div>
 
-<script>
-let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
+<div class="card">
+  <h3>Subscription</h3>
+  <p>Monthly – ₹899</p>
+</div>
 
-function draw(){
-  let box=document.getElementById("list");
-  let total=0; box.innerHTML="";
-  if(cart.length===0){box.innerHTML="Cart is empty";return;}
-  cart.forEach((i,idx)=>{
-    total+=i.price*i.qty;
-    box.innerHTML+=`
-    <div class="item">
-      <div>${i.name}<br>₹${i.price}</div>
-      <div class="qty">
-        <button onclick="chg(${idx},-1)">−</button>
-        ${i.qty}
-        <button onclick="chg(${idx},1)">+</button>
-      </div>
-    </div>`;
-  });
-  document.getElementById("total").innerText=total;
-}
-function chg(i,d){
-  cart[i].qty+=d;
-  if(cart[i].qty<=0) cart.splice(i,1);
-  localStorage.setItem("pyasoCart",JSON.stringify(cart));
-  draw();
-}
-function home(){location.href="index.html"}
-draw();
-</script>
+<div class="card">
+  <h2>Grand Total: ₹939</h2>
+</div>
+
 </body>
 </html>
