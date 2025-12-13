@@ -2,88 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PYASO – Water Delivery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
+*{
+  box-sizing:border-box;
   font-family:system-ui,-apple-system,BlinkMacSystemFont;
-  background:#eef5f3;
-  background-image:
-    linear-gradient(#dfeeea 1px, transparent 1px),
-    linear-gradient(90deg, #dfeeea 1px, transparent 1px);
-  background-size:40px 40px;
-  padding-bottom:90px;
 }
 
-/* HEADER */
-.header{
-  text-align:center;
-  padding:20px 10px;
+body{
+  margin:0;
+  padding-bottom:130px;
+  background-color:#eaf7f6;
+  background-image:
+    linear-gradient(#dff1ef 1px, transparent 1px),
+    linear-gradient(90deg, #dff1ef 1px, transparent 1px);
+  background-size:40px 40px;
 }
+
+/* APP */
+.app{
+  max-width:420px;
+  margin:auto;
+  padding:14px;
+}
+
+/* LOGO */
 .logo{
-  width:140px;
+  text-align:center;
+  margin:20px 0 16px;
 }
-.tagline{
+.logo img{
+  width:140px;
+  background:#fff;
+  border-radius:16px;
+  padding:10px;
+}
+.logo p{
+  margin:6px 0 0;
   color:#444;
-  margin-top:6px;
 }
 
 /* CARD */
 .card{
-  background:rgba(255,255,255,0.85);
-  margin:14px;
-  padding:14px;
-  border-radius:16px;
-}
-.card h3{
-  margin:0 0 10px;
-  display:flex;
-  align-items:center;
-  gap:6px;
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(6px);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:14px;
 }
 
-/* ITEM ROW */
+/* HEAD */
+.card h3{
+  margin:0 0 12px;
+  font-size:18px;
+}
+
+/* ITEM */
 .item{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:8px 0;
+  margin:12px 0;
+  font-size:15px;
 }
+
+/* QTY */
 .qty{
   display:flex;
   align-items:center;
   gap:8px;
 }
 .qty button{
-  width:34px;
-  height:34px;
+  width:36px;
+  height:36px;
   border:none;
   border-radius:10px;
-  background:#1677ff;
+  background:#1a73e8;
   color:#fff;
   font-size:18px;
 }
 .qty span{
-  min-width:18px;
+  min-width:16px;
   text-align:center;
 }
 
 /* CART BAR */
 .cart-bar{
   position:fixed;
-  bottom:60px;
-  left:10px;
-  right:10px;
-  background:#16a34a;
+  bottom:64px;
+  left:0;
+  width:100%;
+  background:#2e7d32;
   color:#fff;
   padding:14px;
-  border-radius:14px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
   font-weight:600;
 }
 
@@ -92,93 +107,156 @@ body{
   position:fixed;
   bottom:0;
   left:0;
-  right:0;
+  width:100%;
   background:#fff;
   border-top:1px solid #ddd;
   display:flex;
   justify-content:space-around;
-  padding:6px 0;
+  padding:8px 0;
 }
 .bottom-nav div{
-  font-size:12px;
   text-align:center;
-}
-.bottom-nav span{
-  display:block;
-  font-size:20px;
+  font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <img src="Screenshot_20251213-180537~2.png" class="logo" alt="PYASO">
-  <div class="tagline">45 min water delivery</div>
-</div>
+<div class="app">
 
-<!-- REFILL -->
-<div class="card">
-<h3>💧 Refill Water</h3>
-<div class="item"><span>10L – ₹25</span><div class="qty"><button onclick="add(25)">+</button><span id="q25">0</span><button onclick="sub(25)">−</button></div></div>
-<div class="item"><span>20L – ₹40</span><div class="qty"><button onclick="add(40)">+</button><span id="q40">0</span><button onclick="sub(40)">−</button></div></div>
-<div class="item"><span>30L – ₹55</span><div class="qty"><button onclick="add(55)">+</button><span id="q55">0</span><button onclick="sub(55)">−</button></div></div>
-</div>
+  <!-- LOGO -->
+  <div class="logo">
+    <!-- 👇 yaha sirf image ka naam change hota hai -->
+    <img src="Screenshot_20251213-180537~2.png">
+    <p>45 min water delivery</p>
+  </div>
 
-<!-- JAR -->
-<div class="card">
-<h3>🫙 Buy Jar / Bottle</h3>
-<div class="item"><span>16L Jar – ₹600</span><div class="qty"><button onclick="add(600)">+</button><span id="q600">0</span><button onclick="sub(600)">−</button></div></div>
-<div class="item"><span>20L Bottle – ₹250</span><div class="qty"><button onclick="add(250)">+</button><span id="q250">0</span><button onclick="sub(250)">−</button></div></div>
-</div>
+  <!-- REFILL -->
+  <div class="card">
+    <h3>💧 Refill Water</h3>
 
-<!-- SUBSCRIPTION -->
-<div class="card">
-<h3>📦 Subscription</h3>
-<div class="item"><span>7 Bottles – ₹37/bottle</span><div class="qty"><button onclick="add(37)">+</button><span id="q37">0</span><button onclick="sub(37)">−</button></div></div>
-<div class="item"><span>15 Bottles – ₹35/bottle</span><div class="qty"><button onclick="add(35)">+</button><span id="q35">0</span><button onclick="sub(35)">−</button></div></div>
-<div class="item"><span>30 Bottles – ₹900</span><div class="qty"><button onclick="add(900)">+</button><span id="q900">0</span><button onclick="sub(900)">−</button></div></div>
-</div>
+    <div class="item">
+      10L – ₹25
+      <div class="qty">
+        <button onclick="dec(0)">−</button>
+        <span id="q0">0</span>
+        <button onclick="inc(0)">+</button>
+      </div>
+    </div>
 
-<!-- BULK -->
-<div class="card">
-<h3>🚚 Bulk Order</h3>
-<div class="item"><span>10 Can – ₹35/can</span><div class="qty"><button onclick="add(350)">+</button><span id="q350">0</span><button onclick="sub(350)">−</button></div></div>
+    <div class="item">
+      20L – ₹40
+      <div class="qty">
+        <button onclick="dec(1)">−</button>
+        <span id="q1">0</span>
+        <button onclick="inc(1)">+</button>
+      </div>
+    </div>
+
+    <div class="item">
+      30L – ₹55
+      <div class="qty">
+        <button onclick="dec(2)">−</button>
+        <span id="q2">0</span>
+        <button onclick="inc(2)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUY -->
+  <div class="card">
+    <h3>🫙 Buy Jar / Bottle</h3>
+
+    <div class="item">
+      16L Jar – ₹600
+      <div class="qty">
+        <button onclick="dec(3)">−</button>
+        <span id="q3">0</span>
+        <button onclick="inc(3)">+</button>
+      </div>
+    </div>
+
+    <div class="item">
+      20L Bottle – ₹250
+      <div class="qty">
+        <button onclick="dec(4)">−</button>
+        <span id="q4">0</span>
+        <button onclick="inc(4)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIPTION -->
+  <div class="card">
+    <h3>📦 Subscription</h3>
+
+    <div class="item">
+      7 Bottles – ₹37/bottle
+      <div class="qty">
+        <button onclick="dec(5)">−</button>
+        <span id="q5">0</span>
+        <button onclick="inc(5)">+</button>
+      </div>
+    </div>
+
+    <div class="item">
+      15 Bottles – ₹35/bottle
+      <div class="qty">
+        <button onclick="dec(6)">−</button>
+        <span id="q6">0</span>
+        <button onclick="inc(6)">+</button>
+      </div>
+    </div>
+
+    <div class="item">
+      30 Bottles – ₹900
+      <div class="qty">
+        <button onclick="dec(7)">−</button>
+        <span id="q7">0</span>
+        <button onclick="inc(7)">+</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- CART BAR -->
 <div class="cart-bar">
-<span id="items">0 items</span>
-<span id="total">₹0</span>
+  <span id="items">0 items</span>
+  <span>₹<span id="total">0</span></span>
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-<div><span>🏠</span>Home</div>
-<div><span>💰</span>Wallet</div>
-<div><span>🛒</span>Cart</div>
-<div><span>🔥</span>Offers</div>
-<div><span>👤</span>Profile</div>
+  <div>🏠<br>Home</div>
+  <div>💰<br>Wallet</div>
+  <div>🛒<br>Cart</div>
+  <div>🔥<br>Offers</div>
+  <div>👤<br>Profile</div>
 </div>
 
 <script>
-let total=0, items=0;
-function add(p){
- total+=p; items++;
- document.getElementById("total").innerText="₹"+total;
- document.getElementById("items").innerText=items+" items";
- let q=document.getElementById("q"+p);
- if(q) q.innerText=parseInt(q.innerText)+1;
+let price=[25,40,55,600,250,37,35,900];
+let qty=[0,0,0,0,0,0,0,0];
+
+function inc(i){
+  qty[i]++;
+  update();
 }
-function sub(p){
- let q=document.getElementById("q"+p);
- if(q && parseInt(q.innerText)>0){
-   q.innerText=parseInt(q.innerText)-1;
-   total-=p; items--;
-   document.getElementById("total").innerText="₹"+total;
-   document.getElementById("items").innerText=items+" items";
- }
+function dec(i){
+  if(qty[i]>0) qty[i]--;
+  update();
+}
+function update(){
+  let items=0,total=0;
+  for(let i=0;i<qty.length;i++){
+    document.getElementById("q"+i).innerText=qty[i];
+    items+=qty[i];
+    total+=qty[i]*price[i];
+  }
+  document.getElementById("items").innerText=items+" items";
+  document.getElementById("total").innerText=total;
 }
 </script>
 
