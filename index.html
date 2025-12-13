@@ -1,92 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PYASO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PYASO – Water Delivery</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#eaf6f6;
+  text-align:center;
+}
+
+/* Header */
+.header{
+  padding:30px 16px 20px;
+  background:linear-gradient(#b3e5fc,#e1f5fe);
+}
+.logo-box{
+  background:white;
+  width:140px;
+  height:140px;
+  margin:0 auto;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo-box img{
+  max-width:110px;
+}
+.header h1{
+  margin:16px 0 6px;
+  font-size:30px;
+  letter-spacing:2px;
+}
+.header p{
+  margin:0;
+  color:#555;
+}
+
+/* Main buttons */
+.container{
+  padding:20px;
+}
+.main-btn{
+  width:100%;
+  padding:18px;
+  font-size:18px;
+  border-radius:18px;
+  border:none;
+  margin-bottom:16px;
+  background:#1e88e5;
+  color:white;
+}
+
+/* Bottom Nav */
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 -2px 8px rgba(0,0,0,0.1);
+}
+.nav div{
+  font-size:13px;
+  color:#555;
+}
+</style>
 </head>
+
 <body>
 
 <!-- HEADER -->
 <div class="header">
-  <img src="Screenshot_20251213-180537~2.png" class="logo">
+  <div class="logo-box">
+    <!-- PYASO LOGO -->
+    <img src="Screenshot_20251213-180537~2.png" alt="PYASO Logo">
+  </div>
+
   <h1>PYASO</h1>
-  <p>Water to your 🚪</p>
+  <p>45 min water delivery</p>
 </div>
 
-<!-- 1 JAR REFILL -->
-<div class="card">
-  <div class="row">
-    <div class="icon">
-      <img src="Screenshot_20251213-180537~2.png" class="jar-logo">
-    </div>
+<!-- MAIN -->
+<div class="container">
+  <button class="main-btn"
+    onclick="window.location.href='products.html'">
+    Buy Products
+  </button>
 
-    <div class="text">
-      <h3>1 Jar Refill</h3>
-      <small>₹40 per jar (one-time)</small>
-    </div>
-
-    <div class="qty">
-      <button onclick="changeJar(-1)">-</button>
-      <span id="jarQty">0</span>
-      <button onclick="changeJar(1)">+</button>
-    </div>
-  </div>
-</div>
-
-<!-- WEEKLY REFILL -->
-<div class="card">
-  <span class="tag">WEEKLY</span>
-  <div class="row">
-    <div class="icon">📅</div>
-
-    <div class="text">
-      <h3>Weekly Refill</h3>
-      <small>7 cans / week • ₹245</small>
-    </div>
-
-    <div class="qty">
-      <button onclick="changeWeekly(-1)">-</button>
-      <span id="weeklyQty">0</span>
-      <button onclick="changeWeekly(1)">+</button>
-    </div>
-  </div>
-</div>
-
-<!-- MONTHLY REFILL -->
-<div class="card">
-  <span class="tag orange">MONTHLY</span>
-  <div class="row">
-    <div class="icon">🗓️</div>
-
-    <div class="text">
-      <h3>Monthly Refill</h3>
-      <small>30 cans / month • ₹899</small>
-    </div>
-
-    <div class="qty">
-      <button onclick="changeMonthly(-1)">-</button>
-      <span id="monthlyQty">0</span>
-      <button onclick="changeMonthly(1)">+</button>
-    </div>
-  </div>
-</div>
-
-<!-- CART BUTTON -->
-<div class="checkout">
-  <button onclick="goToCart()">Go to Cart</button>
+  <button class="main-btn"
+    style="background:#43a047">
+    Refill Water
+  </button>
 </div>
 
 <!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <a class="active">🏠<span>Home</span></a>
-  <a>📦<span>Products</span></a>
-  <a href="cart.html">🛒<span>Cart</span></a>
-  <a>🔥<span>Offers</span></a>
-  <a>👤<span>Profile</span></a>
+<div class="nav">
+  <div>Home</div>
+  <div>Products</div>
+  <div>Cart</div>
+  <div>Offers</div>
+  <div>Profile</div>
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>
