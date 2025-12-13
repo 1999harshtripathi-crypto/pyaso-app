@@ -1,3 +1,8 @@
+/* RESET */
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   font-family:Arial, sans-serif;
@@ -9,25 +14,25 @@ body{
 .header{
   background:linear-gradient(180deg,#9fd6ff,#ffffff);
   text-align:center;
-  padding:30px 20px;
+  padding:25px 20px;
   border-bottom-left-radius:30px;
   border-bottom-right-radius:30px;
 }
 
 .logo{
-  width:80px;
+  width:70px;
   background:transparent;
   mix-blend-mode:multiply;
 }
 
 .header h1{
-  margin:10px 0 0;
+  margin:8px 0 0;
   color:#0f2a44;
 }
 
 .header p{
-  color:#4b6b88;
   margin-top:6px;
+  color:#4b6b88;
 }
 
 /* CARD */
@@ -44,19 +49,26 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:10px;
 }
 
+/* ICON CIRCLE (VERY IMPORTANT) */
 .icon{
+  width:48px;
+  height:48px;
   background:#eaf4ff;
-  padding:12px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
+  overflow:hidden;   /* image bahar nahi niklegi */
 }
 
+/* SMALL BOTTLE IMAGE */
 .jar-logo{
-  width:32px;
+  width:26px;
+  height:auto;
+  object-fit:contain;
 }
 
 /* TEXT */
@@ -79,13 +91,13 @@ body{
 .qty button{
   border:none;
   background:#eaf4ff;
-  padding:8px 12px;
-  font-size:18px;
+  padding:6px 10px;
+  font-size:16px;
   border-radius:50%;
 }
 
 .qty span{
-  margin:0 10px;
+  margin:0 8px;
   font-weight:bold;
 }
 
