@@ -1,252 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PYASO – Water Delivery</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
-  background:
-    linear-gradient(#eaf6f5 1px, transparent 1px),
-    linear-gradient(90deg, #eaf6f5 1px, transparent 1px);
-  background-size:40px 40px;
-  padding-bottom:120px;
-}
-
-.app{
-  max-width:420px;
-  margin:auto;
-  padding:16px;
-}
-
-.logo-box{
-  text-align:center;
-  background:#ffffffaa;
-  border-radius:20px;
-  padding:16px;
-  margin-bottom:16px;
-}
-
-.logo-box img{
-  width:140px;
-}
-
-.subtitle{
-  color:#555;
-  margin-top:6px;
-}
-
-.card{
-  background:#ffffffcc;
-  border-radius:20px;
-  padding:16px;
-  margin-bottom:16px;
-}
-
-.card h3{
-  margin:0 0 10px;
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:10px 0;
-}
-
-.qty{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.qty button{
-  width:36px;
-  height:36px;
-  border:none;
-  background:#0a7cff;
-  color:#fff;
-  font-size:20px;
-  border-radius:10px;
-}
-
-.qty span{
-  min-width:20px;
-  text-align:center;
-  font-weight:600;
-}
-
-.cart-bar{
-  position:fixed;
-  bottom:64px;
-  left:0;
-  width:100%;
-  background:#2e7d32;
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  padding:14px 18px;
-  font-weight:600;
-}
-
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#fff;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  padding:8px 0;
-}
-
-.bottom-nav div{
-  font-size:12px;
-  text-align:center;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>PYASO</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div class="app">
-
-  <!-- LOGO -->
-  <div class="logo-box">
-    <img src="Screenshot_20251213-180537~2.png" alt="PYASO Logo">
-    <div class="subtitle">45 min water delivery</div>
+  <!-- HEADER -->
+  <div class="header">
+    <img src="logo.png" class="logo">
+    <h1>PYASO</h1>
+    <p>45 min water delivery</p>
   </div>
 
-  <!-- REFILL -->
+  <!-- JAR CARD -->
   <div class="card">
-    <h3>💧 Refill Water</h3>
-
-    <div class="item">
-      <div>10L – ₹25</div>
+    <div class="row">
+      <div class="icon">🫙</div>
       <div class="qty">
-        <button onclick="changeQty(0,-1)">-</button>
-        <span id="q0">0</span>
-        <button onclick="changeQty(0,1)">+</button>
+        <button>-</button>
+        <span>1</span>
+        <button>+</button>
       </div>
-    </div>
-
-    <div class="item">
-      <div>20L – ₹40</div>
-      <div class="qty">
-        <button onclick="changeQty(1,-1)">-</button>
-        <span id="q1">0</span>
-        <button onclick="changeQty(1,1)">+</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div>30L – ₹55</div>
-      <div class="qty">
-        <button onclick="changeQty(2,-1)">-</button>
-        <span id="q2">0</span>
-        <button onclick="changeQty(2,1)">+</button>
-      </div>
+      <div class="price">₹40</div>
     </div>
   </div>
 
-  <!-- JAR -->
+  <!-- WEEKLY -->
   <div class="card">
-    <h3>🫙 Buy Jar / Bottle</h3>
-
-    <div class="item">
-      <div>16L Jar – ₹600</div>
-      <div class="qty">
-        <button onclick="changeQty(3,-1)">-</button>
-        <span id="q3">0</span>
-        <button onclick="changeQty(3,1)">+</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div>20L Bottle – ₹250</div>
-      <div class="qty">
-        <button onclick="changeQty(4,-1)">-</button>
-        <span id="q4">0</span>
-        <button onclick="changeQty(4,1)">+</button>
+    <span class="tag">WEEKLY</span>
+    <div class="row">
+      <div class="icon">📅</div>
+      <div>
+        <h3>Weekly</h3>
+        <small>₹245 / month</small>
       </div>
     </div>
   </div>
 
-  <!-- SUBSCRIPTION -->
+  <!-- MONTHLY -->
   <div class="card">
-    <h3>📦 Subscription</h3>
-
-    <div class="item">
-      <div>7 Bottles – ₹37/bottle</div>
-      <div class="qty">
-        <button onclick="changeQty(5,-1)">-</button>
-        <span id="q5">0</span>
-        <button onclick="changeQty(5,1)">+</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div>15 Bottles – ₹35/bottle</div>
-      <div class="qty">
-        <button onclick="changeQty(6,-1)">-</button>
-        <span id="q6">0</span>
-        <button onclick="changeQty(6,1)">+</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div>30 Bottles – ₹900</div>
-      <div class="qty">
-        <button onclick="changeQty(7,-1)">-</button>
-        <span id="q7">0</span>
-        <button onclick="changeQty(7,1)">+</button>
+    <span class="tag orange">MONTHLY</span>
+    <div class="row">
+      <div class="icon">🗓️</div>
+      <div>
+        <h3>Monthly</h3>
+        <small>₹899 / month</small>
       </div>
     </div>
   </div>
 
-</div>
-
-<!-- CART BAR -->
-<div class="cart-bar">
-  <div id="items">0 items</div>
-  <div id="total">₹0</div>
-</div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <div>🏠<br>Home</div>
-  <div>💰<br>Wallet</div>
-  <div>🛒<br>Cart</div>
-  <div>🔥<br>Offers</div>
-  <div>👤<br>Profile</div>
-</div>
-
-<script>
-const prices=[25,40,55,600,250,37,35,900];
-const qty=Array(8).fill(0);
-
-function changeQty(i,d){
-  qty[i]=Math.max(0,qty[i]+d);
-  document.getElementById("q"+i).innerText=qty[i];
-  updateCart();
-}
-
-function updateCart(){
-  let items=0,total=0;
-  qty.forEach((q,i)=>{
-    items+=q;
-    total+=q*prices[i];
-  });
-  document.getElementById("items").innerText=items+" items";
-  document.getElementById("total").innerText="₹"+total;
-}
-</script>
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a class="active">🏠<span>Home</span></a>
+    <a>💼<span>Wallet</span></a>
+    <a href="cart.html">🛒<span>Cart</span></a>
+    <a>🔥<span>Offers</span></a>
+    <a>👤<span>Profile</span></a>
+  </div>
 
 </body>
 </html>
