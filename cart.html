@@ -1,107 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>PYASO – Cart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Your Cart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{
-  margin:0;
-  font-family:system-ui;
-  background:#f4f7fb;
-  padding-bottom:80px;
-}
-.app{
-  max-width:420px;
-  margin:auto;
-  padding:12px;
-}
-.card{
-  background:#fff;
-  border-radius:16px;
-  padding:14px;
-  margin-top:12px;
-}
-.item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:10px 0;
-}
-.qty{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.qty button{
-  width:32px;
-  height:32px;
-  border:none;
-  border-radius:8px;
-  background:#0a7cff;
-  color:#fff;
-}
-.pay{
-  width:100%;
-  padding:14px;
-  background:#0a7cff;
-  color:#fff;
-  border:none;
-  border-radius:14px;
-  margin-top:12px;
-}
-.bottom{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  max-width:420px;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  padding:8px 0;
-  border-top:1px solid #ddd;
-}
+body{margin:0;font-family:system-ui;background:#f4f7fb;padding-bottom:80px}
+.app{max-width:420px;margin:auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-top:12px}
+.item{display:flex;justify-content:space-between;align-items:center;margin:10px 0}
+.qty{display:flex;gap:8px;align-items:center}
+.qty button{width:32px;height:32px;background:#0a7cff;color:#fff;border:none;border-radius:8px}
+.pay{width:100%;padding:14px;background:#0a7cff;color:#fff;border:none;border-radius:14px}
+.bottom-nav{position:fixed;bottom:0;width:100%;max-width:420px;
+background:#fff;display:flex;justify-content:space-around;
+padding:8px 0;border-top:1px solid #ddd}
 </style>
 </head>
 
 <body>
 <div class="app">
-
 <h2>🛒 Your Cart</h2>
 
-<div class="card" id="cartBox"></div>
+<div class="card" id="list"></div>
 
 <div class="card">
   <h3>Total: ₹<span id="total">0</span></h3>
-  <button class="pay" onclick="payment()">Proceed to Payment</button>
+  <button class="pay">Proceed to Payment</button>
+</div>
 </div>
 
-</div>
-
-<div class="bottom">
+<div class="bottom-nav">
   <div onclick="home()">🏠<br>Home</div>
   <div>🔁<br>Order Again</div>
   <div>👤<br>Profile</div>
 </div>
 
 <script>
-let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
+let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
 
-function render(){
-  let box=document.getElementById("cartBox");
-  let total=0;
-  box.innerHTML="";
-  if(cart.length===0){
-    box.innerHTML="Cart empty";
-    document.getElementById("total").innerText=0;
-    return;
-  }
+function draw(){
+  let box=document.getElementById("list");
+  let total=0; box.innerHTML="";
+  if(cart.length===0){box.innerHTML="Cart is empty";return;}
   cart.forEach((i,idx)=>{
     total+=i.price*i.qty;
     box.innerHTML+=`
     <div class="item">
-      <div><b>${i.name}</b><br>₹${i.price}</div>
+      <div>${i.name}<br>₹${i.price}</div>
       <div class="qty">
         <button onclick="chg(${idx},-1)">−</button>
         ${i.qty}
@@ -111,24 +57,14 @@ function render(){
   });
   document.getElementById("total").innerText=total;
 }
-
 function chg(i,d){
   cart[i].qty+=d;
   if(cart[i].qty<=0) cart.splice(i,1);
   localStorage.setItem("pyasoCart",JSON.stringify(cart));
-  render();
+  draw();
 }
-
-function home(){
-  window.location.href="index.html";
-}
-
-function payment(){
-  alert("Payment page next 🚀");
-}
-
-render();
+function home(){location.href="index.html"}
+draw();
 </script>
-
 </body>
 </html>
