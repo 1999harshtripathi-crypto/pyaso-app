@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PYASO – Water Delivery</title>
+<title>PYASO – Quick Water Delivery</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -24,10 +24,10 @@ body {
 }
 .header h1 { margin: 0; }
 .city {
+  float: right;
   background: rgba(255,255,255,0.2);
   padding: 6px 12px;
   border-radius: 20px;
-  float: right;
 }
 .info {
   margin: 12px 0;
@@ -42,6 +42,9 @@ body {
   padding: 15px;
   margin-top: 12px;
 }
+.option {
+  margin: 8px 0;
+}
 button {
   width: 100%;
   padding: 12px;
@@ -50,9 +53,7 @@ button {
   background: #007bff;
   color: #fff;
   font-size: 16px;
-}
-.option {
-  margin: 8px 0;
+  margin-top: 10px;
 }
 .cart {
   margin-top: 15px;
@@ -60,21 +61,16 @@ button {
   padding: 15px;
   border-radius: 16px;
 }
-.qty {
+.cart-item {
   display: flex;
-  gap: 10px;
-  align-items: center;
-}
-.qty button {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  justify-content: space-between;
+  margin: 6px 0;
 }
 .total {
   font-size: 18px;
   font-weight: bold;
+  margin-top: 10px;
 }
-.hide { display: none; }
 </style>
 </head>
 
@@ -92,60 +88,69 @@ button {
   <!-- REFILL -->
   <div class="card">
     <h3>💧 Refill Water</h3>
-    <div class="option"><input type="radio" name="product" value="25"> 10L – ₹25</div>
-    <div class="option"><input type="radio" name="product" value="40"> 20L – ₹40</div>
-    <div class="option"><input type="radio" name="product" value="55"> 30L – ₹55</div>
-    <button onclick="addToCart()">Add to Cart</button>
+    <div class="option"><input type="checkbox" data-name="10L Refill" data-price="25"> 10L – ₹25</div>
+    <div class="option"><input type="checkbox" data-name="20L Refill" data-price="40"> 20L – ₹40</div>
+    <div class="option"><input type="checkbox" data-name="30L Refill" data-price="55"> 30L – ₹55</div>
   </div>
 
   <!-- JAR -->
   <div class="card">
     <h3>🫙 Buy Jar / Bottle</h3>
-    <div class="option"><input type="radio" name="product" value="600"> 16L Jar – ₹600</div>
-    <div class="option"><input type="radio" name="product" value="250"> 20L Bottle – ₹250</div>
-    <button onclick="addToCart()">Add to Cart</button>
+    <div class="option"><input type="checkbox" data-name="16L Jar" data-price="600"> 16L Jar – ₹600</div>
+    <div class="option"><input type="checkbox" data-name="20L Bottle" data-price="250"> 20L Bottle – ₹250</div>
   </div>
 
+  <!-- SUBSCRIPTION -->
+  <div class="card">
+    <h3>🔁 Subscription</h3>
+    <div class="option"><input type="checkbox" data-name="30 Bottles Monthly" data-price="900"> 30 Bottles – ₹900</div>
+    <div class="option"><input type="checkbox" data-name="7 Bottles" data-price="259"> 7 Bottles – ₹37 each</div>
+    <div class="option"><input type="checkbox" data-name="15 Bottles" data-price="525"> 15 Bottles – ₹35 each</div>
+  </div>
+
+  <!-- BULK -->
+  <div class="card">
+    <h3>🎉 Bulk Order</h3>
+    <div class="option"><input type="checkbox" data-name="10 Cans Bulk" data-price="350"> 10 Cans – ₹35/can</div>
+    <div class="option"><input type="checkbox" data-name="20 Cans Bulk" data-price="600"> 20 Cans – ₹30/can</div>
+    <div class="option"><input type="checkbox" data-name="40 Cans Bulk" data-price="1000"> 40 Cans – ₹25/can</div>
+  </div>
+
+  <button onclick="updateCart()">Add Selected to Cart</button>
+
   <!-- CART -->
-  <div class="cart hide" id="cart">
+  <div class="cart">
     <h3>🛒 Your Cart</h3>
-    <div class="qty">
-      <button onclick="changeQty(-1)">−</button>
-      <span id="qty">1</span>
-      <button onclick="changeQty(1)">+</button>
-    </div>
-    <p class="total">Total: ₹<span id="total">0</span></p>
+    <div id="cartItems"></div>
+    <div class="total">Total: ₹<span id="total">0</span></div>
     <button onclick="pay()">Proceed to Payment</button>
   </div>
 
 </div>
 
 <script>
-let price = 0;
-let qty = 1;
+function updateCart() {
+  let items = document.querySelectorAll('input[type=checkbox]:checked');
+  let cart = document.getElementById("cartItems");
+  let total = 0;
+  cart.innerHTML = "";
 
-function addToCart() {
-  let selected = document.querySelector('input[name="product"]:checked');
-  if (!selected) {
-    alert("Please select an option");
-    return;
-  }
-  price = parseInt(selected.value);
-  qty = 1;
-  document.getElementById("qty").innerText = qty;
-  document.getElementById("total").innerText = price;
-  document.getElementById("cart").classList.remove("hide");
-}
+  items.forEach(item => {
+    let price = parseInt(item.dataset.price);
+    total += price;
+    cart.innerHTML += `
+      <div class="cart-item">
+        <span>${item.dataset.name}</span>
+        <span>₹${price}</span>
+      </div>
+    `;
+  });
 
-function changeQty(val) {
-  qty += val;
-  if (qty < 1) qty = 1;
-  document.getElementById("qty").innerText = qty;
-  document.getElementById("total").innerText = price * qty;
+  document.getElementById("total").innerText = total;
 }
 
 function pay() {
-  alert("Payment Gateway coming soon 🚀");
+  alert("Payment + Delivery flow next step 🚀");
 }
 </script>
 
