@@ -1,215 +1,95 @@
-/* RESET */
-*{
-  box-sizing:border-box;
-}
-
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#ffffff;
-  padding-bottom:90px;
+  background:#eaf6f6;
 }
 
-/* ================= HEADER ================= */
-.header{
-  background:linear-gradient(180deg,#9fd6ff,#ffffff);
+.hero{
   text-align:center;
-  padding:25px 20px;
-  border-bottom-left-radius:30px;
-  border-bottom-right-radius:30px;
-}
-
-.small-header{
-  padding:15px;
+  padding:30px;
 }
 
 .logo{
-  width:70px;
-  mix-blend-mode:multiply;
+  width:80px;
+  border-radius:16px;
 }
 
-.header h1{
-  margin:8px 0 0;
-  color:#0f2a44;
-}
-
-.header p{
-  margin-top:6px;
-  color:#4b6b88;
-}
-
-/* ================= CARD ================= */
 .card{
-  background:#fff;
+  margin:20px;
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  border-top:1px solid #ddd;
+}
+
+.bottom-nav span{
+  color:#777;
+}
+
+.bottom-nav .active{
+  color:#1e88e5;
+  font-weight:bold;
+}
+
+.top-bar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:15px;
+  background:white;
+}
+
+.product-card{
+  background:white;
   margin:15px;
   padding:15px;
-  border-radius:18px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.06);
-  position:relative;
-}
-
-.row{
+  border-radius:16px;
   display:flex;
+  gap:15px;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
 }
 
-/* ================= ICON ================= */
-.icon{
-  width:48px;
-  height:48px;
-  background:#eaf4ff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
+.product-card img{
+  width:70px;
+  height:70px;
+  border-radius:12px;
+  object-fit:cover;
 }
 
-.jar-logo{
-  width:26px;
-  height:auto;
-}
-
-/* ================= TEXT ================= */
-.text h3{
-  margin:0;
-  color:#0f2a44;
-  font-size:16px;
-}
-
-.text small{
-  color:#4b6b88;
-  font-weight:600;
-}
-
-/* ================= QTY ================= */
 .qty{
   display:flex;
+  gap:10px;
   align-items:center;
 }
 
 .qty button{
+  width:32px;
+  height:32px;
   border:none;
-  background:#eaf4ff;
-  padding:6px 10px;
-  font-size:16px;
-  border-radius:50%;
+  border-radius:8px;
+  background:#1e88e5;
+  color:white;
+  font-size:18px;
 }
 
-.qty span{
-  margin:0 8px;
-  font-weight:bold;
-}
-
-/* ================= TAG ================= */
-.tag{
-  position:absolute;
-  top:-10px;
-  left:15px;
-  background:#ff9f43;
-  color:#fff;
-  font-size:12px;
-  padding:4px 10px;
-  border-radius:10px;
-}
-
-.orange{
-  background:#ff7a18;
-}
-
-/* ================= BUTTON ================= */
-.checkout button{
-  width:90%;
-  margin:20px 5%;
-  padding:15px;
-  font-size:16px;
-  background:#2f80ed;
-  color:#fff;
-  border:none;
-  border-radius:20px;
-}
-
-/* ================= BOTTOM NAV ================= */
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  background:#fff;
-  border-top:1px solid #eee;
-  padding:10px 0;
-}
-
-.bottom-nav a{
-  text-align:center;
-  font-size:12px;
-  color:#888;
-  text-decoration:none;
-}
-
-.bottom-nav span{
-  display:block;
-  font-size:11px;
-}
-
-.bottom-nav .active{
-  color:#2f80ed;
-}
-
-/* ================= CART ================= */
-.cart-container{
-  padding:10px;
-}
-
-.cart-card{
-  background:#fff;
-  margin:12px;
-  padding:15px;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 4px 12px rgba(0,0,0,0.06);
-}
-
-.cart-icon{
-  font-size:26px;
-  background:#eaf4ff;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.cart-text h3{
-  margin:0;
-  font-size:15px;
-  color:#0f2a44;
-}
-
-.cart-text small{
-  color:#4b6b88;
-}
-
-.cart-price{
-  font-weight:bold;
-  font-size:16px;
-}
-
-/* ================= CART TOTAL ================= */
-.cart-total{
+.cart-btn{
   margin:20px;
+  width:calc(100% - 40px);
   padding:15px;
-  background:#f1f8ff;
-  border-radius:16px;
-  display:flex;
-  justify-content:space-between;
+  background:#43a047;
+  color:white;
+  border:none;
+  border-radius:14px;
   font-size:16px;
-  color:#0f2a44;
 }
