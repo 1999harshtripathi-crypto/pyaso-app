@@ -1,128 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>PYASO – Water Delivery</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family:system-ui;
+  font-family:system-ui, -apple-system;
   background:#f4f7fb;
   padding-bottom:140px;
 }
-.app{max-width:420px;margin:auto;padding:12px}
+.container{max-width:420px;margin:auto;padding:12px}
+
+/* HEADER */
 .header{
-  background:linear-gradient(135deg,#0a7cff,#22c1ff);
-  color:#fff;border-radius:16px;padding:16px
+  text-align:center;
+  padding:20px 10px;
 }
+.logo{
+  width:120px;
+  margin:auto;
+  display:block;
+}
+.tagline{color:#555;font-size:14px}
+
+/* CARD */
 .card{
-  background:#fff;border-radius:16px;
-  padding:14px;margin-top:14px
+  background:#fff;
+  border-radius:16px;
+  padding:14px;
+  margin-top:14px;
 }
+.card h3{margin:0 0 10px 0}
+
+/* ITEM ROW */
 .item{
-  display:flex;justify-content:space-between;
-  align-items:center;margin:10px 0
-}
-button{
-  background:#0a7cff;color:#fff;
-  border:none;padding:10px 16px;
-  border-radius:12px
-}
-.cart-bar{
-  position:fixed;
-  bottom:56px; /* 👈 bottom nav ke upar */
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:420px;
-  background:#1faa00;
-  color:#fff;
-  padding:12px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-weight:600;
-  z-index:10;
+  margin:10px 0;
 }
-.bottom-nav{
+.item span{font-size:15px}
+
+/* ADD BUTTON */
+.add-btn{
+  background:#0a7cff;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:20px;
+}
+
+/* QTY */
+.qty{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.qty button{
+  width:28px;
+  height:28px;
+  border:none;
+  background:#0a7cff;
+  color:#fff;
+  border-radius:8px;
+}
+.qty span{min-width:16px;text-align:center}
+
+/* FLOATING CART */
+.cart-bar{
   position:fixed;
-  bottom:0;width:100%;
-  max-width:420px;
+  bottom:64px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  background:#18a118;
+  color:#fff;
+  padding:12px;
+  border-radius:14px;
+  display:none;
+  justify-content:space-between;
+  align-items:center;
+}
+.cart-bar button{
+  background:#fff;
+  color:#18a118;
+  border:none;
+  padding:6px 12px;
+  border-radius:20px;
+}
+
+/* BOTTOM NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
   background:#fff;
   display:flex;
   justify-content:space-around;
   padding:8px 0;
   border-top:1px solid #ddd;
 }
+.nav div{text-align:center;font-size:12px}
+.nav span{font-size:20px;display:block}
 </style>
 </head>
 
 <body>
-<div class="app">
 
-<div class="header">
-  <h2>PYASO</h2>
-  <p>45 min water delivery</p>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="Screenshot_20251213-164914~2.png" class="logo" alt="PYASO">
+    <div class="tagline">45 min water delivery</div>
+  </div>
+
+  <!-- REFILL -->
+  <div class="card">
+    <h3>💧 Refill Water</h3>
+    <div class="item">
+      <span>10L – ₹25</span>
+      <div class="qty" data-name="10L Refill" data-price="25"></div>
+    </div>
+    <div class="item">
+      <span>20L – ₹40</span>
+      <div class="qty" data-name="20L Refill" data-price="40"></div>
+    </div>
+    <div class="item">
+      <span>30L – ₹55</span>
+      <div class="qty" data-name="30L Refill" data-price="55"></div>
+    </div>
+  </div>
+
+  <!-- JAR -->
+  <div class="card">
+    <h3>🫙 Buy Jar / Bottle</h3>
+    <div class="item">
+      <span>16L Jar – ₹600</span>
+      <div class="qty" data-name="16L Jar" data-price="600"></div>
+    </div>
+    <div class="item">
+      <span>20L Bottle – ₹250</span>
+      <div class="qty" data-name="20L Bottle" data-price="250"></div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIPTION -->
+  <div class="card">
+    <h3>📦 Subscription</h3>
+    <div class="item">
+      <span>30 Bottles – ₹900</span>
+      <div class="qty" data-name="30 Bottle Plan" data-price="900"></div>
+    </div>
+  </div>
+
+  <!-- BULK -->
+  <div class="card">
+    <h3>🚚 Bulk Order</h3>
+    <div class="item">
+      <span>10 Can – ₹35/can</span>
+      <div class="qty" data-name="10 Can Bulk" data-price="350"></div>
+    </div>
+  </div>
+
 </div>
 
-<div class="card">
-  <h3>💧 Refill Water</h3>
-  <div class="item"><span>10L – ₹25</span><button onclick="add('Refill 10L',25)">Add</button></div>
-  <div class="item"><span>20L – ₹40</span><button onclick="add('Refill 20L',40)">Add</button></div>
-  <div class="item"><span>30L – ₹55</span><button onclick="add('Refill 30L',55)">Add</button></div>
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar">
+  <div id="cartInfo">0 items | ₹0</div>
+  <button onclick="goCart()">View Cart</button>
 </div>
 
-<div class="card">
-  <h3>🫙 Buy Jar / Bottle</h3>
-  <div class="item"><span>16L Jar – ₹600</span><button onclick="add('16L Jar',600)">Add</button></div>
-  <div class="item"><span>20L Bottle – ₹250</span><button onclick="add('20L Bottle',250)">Add</button></div>
-</div>
-
-<div class="card">
-  <h3>📦 Subscription</h3>
-  <div class="item"><span>30 Bottles – ₹900</span><button onclick="add('Sub 30 Bottle',900)">Add</button></div>
-  <div class="item"><span>15 Bottles – ₹35/bottle</span><button onclick="add('Sub 15 Bottle',525)">Add</button></div>
-  <div class="item"><span>7 Bottles – ₹37/bottle</span><button onclick="add('Sub 7 Bottle',259)">Add</button></div>
-</div>
-
-<div class="card">
-  <h3>🚚 Bulk Order</h3>
-  <div class="item"><span>10 Can – ₹35/can</span><button onclick="add('Bulk 10 Can',350)">Add</button></div>
-  <div class="item"><span>20 Can – ₹30/can</span><button onclick="add('Bulk 20 Can',600)">Add</button></div>
-</div>
-
-</div>
-
-<div class="cart-bar" onclick="goCart()">
-  <span id="count">0 items</span>
-  <span>View Cart ➜</span>
-</div>
-
-<div class="bottom-nav">
-  <div>🏠<br>Home</div>
-  <div>🔁<br>Order Again</div>
-  <div>👤<br>Profile</div>
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <div><span>🏠</span>Home</div>
+  <div><span>💰</span>Wallet</div>
+  <div><span>🛒</span>Cart</div>
+  <div><span>🔥</span>Offers</div>
+  <div><span>👤</span>Profile</div>
 </div>
 
 <script>
-function add(name,price){
-  let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
-  let item=cart.find(i=>i.name===name);
-  if(item) item.qty++;
-  else cart.push({name,price,qty:1});
-  localStorage.setItem("pyasoCart",JSON.stringify(cart));
-  update();
-}
-function update(){
-  let cart=JSON.parse(localStorage.getItem("pyasoCart"))||[];
-  let total=cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById("count").innerText=total+" items";
-}
-function goCart(){location.href="cart.html"}
-update();
-</script>
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-</body>
-</html>
+document.querySelectorAll(".qty").forEach(box=>{
+  const name = box.dataset.name;
+  const price = Number(box.dataset.price);
+
+  box.innerHTML = `
+    <button>-</button>
+    <span>0</span>
+    <button>+</button>
+  `;
+
+  const minus = box.children[0];
+  const count = box.children[1];
+  const plus  = box.children[2];
+
+  plus.onclick = ()=>{
+    cart[name] = cart[name] || {qty:0,price};
+    cart[name].qty++;
+    count.innerText = cart[name].qty;
+    updateCart();
+  };
+
+  minus.onclick = ()=>{
+    if(cart[name]?.qty>0){
+      cart[name].qty--;
+      count.innerText = cart[name].qty;
+      if(cart[name].qty===0) delete cart[name];
+      updateCart();
+    }
+  };
+});
+
+function updateCart(){
+  let items=0,total=0;
+  for(let k in cart){
+    items+=cart[k].qty;
+    total+=cart[k].qty*cart[k].price;
+  }
+  localStorage
