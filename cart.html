@@ -1,90 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>My Cart</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <title>Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="script.js"></script>
+  <style>
+    body { font-family:sans-serif; padding:20px; }
+    .cart-item {
+      display:flex; gap:12px; margin-bottom:12px;
+      align-items:center;
+    }
+    img { width:60px; height:60px; border-radius:10px; }
+  </style>
 </head>
-<body>
 
-<!-- HEADER -->
-<div class="header small-header">
-  <h1>My Cart</h1>
-</div>
+<body onload="loadCart()">
 
-<div class="cart-container" id="cartItems">
-  <!-- Items will load here -->
-</div>
+<h2>Your Cart</h2>
 
-<!-- TOTAL -->
-<div class="cart-total" id="cartTotal"></div>
+<div id="cart-items"></div>
 
-<!-- CHECKOUT -->
-<div class="checkout">
-  <button onclick="placeOrder()">Place Order</button>
-</div>
-
-<script>
-let jar = +localStorage.getItem("jar") || 0;
-let weekly = +localStorage.getItem("weekly") || 0;
-let monthly = +localStorage.getItem("monthly") || 0;
-
-let html = "";
-let total = 0;
-
-if(jar > 0){
-  let price = jar * 40;
-  total += price;
-  html += `
-  <div class="cart-card">
-    <div class="cart-icon">🫙</div>
-    <div class="cart-text">
-      <h3>1 Jar Refill</h3>
-      <small>${jar} × ₹40</small>
-    </div>
-    <div class="cart-price">₹${price}</div>
-  </div>`;
-}
-
-if(weekly > 0){
-  total += 245;
-  html += `
-  <div class="cart-card">
-    <div class="cart-icon">📅</div>
-    <div class="cart-text">
-      <h3>Weekly Refill</h3>
-      <small>7 cans / week</small>
-    </div>
-    <div class="cart-price">₹245</div>
-  </div>`;
-}
-
-if(monthly > 0){
-  total += 899;
-  html += `
-  <div class="cart-card">
-    <div class="cart-icon">🗓️</div>
-    <div class="cart-text">
-      <h3>Monthly Refill</h3>
-      <small>30 cans / month</small>
-    </div>
-    <div class="cart-price">₹899</div>
-  </div>`;
-}
-
-if(html === ""){
-  html = `<p style="text-align:center;color:#888;">Your cart is empty</p>`;
-}
-
-document.getElementById("cartItems").innerHTML = html;
-document.getElementById("cartTotal").innerHTML =
-  `<span>Total Payable</span><strong>₹${total}</strong>`;
-
-function placeOrder(){
-  alert("Order placed successfully 🚚💧");
-}
-</script>
+<h3>Total: <span id="total">₹0</span></h3>
 
 </body>
 </html>
