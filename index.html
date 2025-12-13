@@ -12,19 +12,26 @@
 <div class="header">
   <img src="Screenshot_20251213-180537~2.png" class="logo">
   <h1>PYASO</h1>
-  <p>45 min water delivery</p>
+  <p>Water to your 🚪</p>
 </div>
 
-<!-- 1 JAR -->
+<!-- SINGLE JAR -->
 <div class="card">
   <div class="row">
-    <div class="icon">🫙</div>
+    <div class="icon">
+      <img src="Screenshot_20251213-180537~2.png" class="jar-logo">
+    </div>
+
+    <div class="text">
+      <h3>1 Jar</h3>
+      <small id="jarPrice"></small>
+    </div>
+
     <div class="qty">
       <button onclick="changeJar(-1)">-</button>
       <span id="jarQty">0</span>
       <button onclick="changeJar(1)">+</button>
     </div>
-    <div class="price" id="jarPrice"></div>
   </div>
 </div>
 
@@ -33,10 +40,12 @@
   <span class="tag">WEEKLY</span>
   <div class="row">
     <div class="icon">📅</div>
+
     <div class="text">
       <h3>Weekly</h3>
       <small>₹245 / month</small>
     </div>
+
     <div class="qty">
       <button onclick="changeWeekly(-1)">-</button>
       <span id="weeklyQty">0</span>
@@ -50,10 +59,12 @@
   <span class="tag orange">MONTHLY</span>
   <div class="row">
     <div class="icon">🗓️</div>
+
     <div class="text">
       <h3>Monthly</h3>
       <small>₹899 / month</small>
     </div>
+
     <div class="qty">
       <button onclick="changeMonthly(-1)">-</button>
       <span id="monthlyQty">0</span>
@@ -62,6 +73,7 @@
   </div>
 </div>
 
+<!-- GO TO CART -->
 <div class="checkout">
   <button onclick="goToCart()">Go to Cart</button>
 </div>
