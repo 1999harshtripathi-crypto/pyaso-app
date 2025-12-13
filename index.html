@@ -4,107 +4,28 @@
 <meta charset="UTF-8">
 <title>PYASO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(#bfe5ff,#f7fbff);
-}
-.container{
-  padding:20px;
-  padding-bottom:90px;
-  text-align:center;
-}
-.logo-img{
-  width:90px;
-  mix-blend-mode:multiply;
-}
-h1{
-  margin:10px 0 4px;
-  font-size:28px;
-}
-.tagline{
-  color:#2b3a4a;
-}
-.card{
-  background:#fff;
-  border-radius:18px;
-  padding:15px;
-  margin:16px 0;
-  box-shadow:0 8px 18px rgba(0,0,0,.06);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.left{
-  display:flex;
-  gap:12px;
-  text-align:left;
-}
-.icon{
-  width:44px;
-  height:44px;
-  background:#eaf6ff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.label{
-  background:orange;
-  color:#fff;
-  font-size:11px;
-  padding:3px 8px;
-  border-radius:10px;
-  margin-bottom:4px;
-  display:inline-block;
-}
-.qty{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.qty button{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  border:none;
-  background:#eaf6ff;
-  font-size:18px;
-}
-.go-cart{
-  width:100%;
-  padding:14px;
-  background:#2f80ed;
-  color:#fff;
-  border:none;
-  border-radius:14px;
-  font-size:16px;
-}
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  border-top:1px solid #ddd;
-  padding:8px 0;
-}
-.bottom-nav div{
-  text-align:center;
-  font-size:12px;
-  color:#777;
-}
-.bottom-nav i{
-  font-size:18px;
-  display:block;
-}
-.active{color:#2f80ed;}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#bfe5ff,#f7fbff)}
+.container{padding:20px;padding-bottom:90px;text-align:center}
+.logo-img{width:90px;mix-blend-mode:multiply}
+h1{margin:10px 0 4px;font-size:28px}
+.tagline{color:#2b3a4a}
+.card{background:#fff;border-radius:18px;padding:15px;margin:16px 0;
+box-shadow:0 8px 18px rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center}
+.left{display:flex;gap:12px;text-align:left}
+.icon{width:44px;height:44px;background:#eaf6ff;border-radius:50%;
+display:flex;align-items:center;justify-content:center}
+.label{background:orange;color:#fff;font-size:11px;padding:3px 8px;border-radius:10px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:36px;height:36px;border-radius:50%;border:none;background:#eaf6ff;font-size:18px}
+.go-cart{width:100%;padding:14px;background:#2f80ed;color:#fff;border:none;border-radius:14px;font-size:16px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;
+justify-content:space-around;border-top:1px solid #ddd;padding:8px 0}
+.bottom-nav div{text-align:center;font-size:12px;color:#777}
+.bottom-nav i{font-size:18px;display:block}
+.active{color:#2f80ed}
 </style>
 </head>
 
@@ -112,95 +33,91 @@ h1{
 
 <div class="container">
 
-  <!-- LOGO -->
-  <img src="Screenshot_20251213-180537~2.png" class="logo-img">
+<img src="Screenshot_20251213-180537~2.png" class="logo-img">
+<h1>PYASO</h1>
+<div class="tagline">Water to your 🚪</div>
 
-  <h1>PYASO</h1>
-  <div class="tagline">Water to your 🚪</div>
-
-  <!-- ONE JAR -->
-  <div class="card">
-    <div class="left">
-      <div class="icon">💧</div>
-      <div>
-        <b>1 Jar Refill</b>
-        <div>₹40 per jar (one-time)</div>
-      </div>
-    </div>
-    <div class="qty">
-      <button onclick="changeQty(-1)">−</button>
-      <span id="qty">0</span>
-      <button onclick="changeQty(1)">+</button>
-    </div>
-  </div>
-
-  <!-- WEEKLY -->
-  <div class="card">
-    <div class="left">
-      <div>
-        <div class="label">WEEKLY</div>
-        <b>Weekly Refill</b>
-        <div>7 jars / week · ₹245</div>
-      </div>
-    </div>
-    <div class="qty">
-      <button disabled>−</button>
-      <span>0</span>
-      <button disabled>+</button>
-    </div>
-  </div>
-
-  <!-- MONTHLY -->
-  <div class="card">
-    <div class="left">
-      <div>
-        <div class="label">MONTHLY</div>
-        <b>Monthly Refill</b>
-        <div>30 jars / month · ₹899</div>
-      </div>
-    </div>
-    <div class="qty">
-      <button disabled>−</button>
-      <span>0</span>
-      <button disabled>+</button>
-    </div>
-  </div>
-
-  <button class="go-cart" onclick="addToCart()">Add to Cart</button>
+<!-- ONE TIME -->
+<div class="card">
+<div class="left">
+<div class="icon">💧</div>
+<div>
+<b>1 Jar Refill</b>
+<div>₹40 per jar (one-time)</div>
+</div>
+</div>
+<div class="qty">
+<button onclick="changeQty('one',-1)">−</button>
+<span id="one">0</span>
+<button onclick="changeQty('one',1)">+</button>
+</div>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- WEEKLY -->
+<div class="card">
+<div class="left">
+<div>
+<div class="label">WEEKLY</div>
+<b>Weekly Refill</b>
+<div>7 jars / week · ₹245</div>
+</div>
+</div>
+<div class="qty">
+<button onclick="changeQty('weekly',-1)">−</button>
+<span id="weekly">0</span>
+<button onclick="changeQty('weekly',1)">+</button>
+</div>
+</div>
+
+<!-- MONTHLY -->
+<div class="card">
+<div class="left">
+<div>
+<div class="label">MONTHLY</div>
+<b>Monthly Refill</b>
+<div>30 jars / month · ₹899</div>
+</div>
+</div>
+<div class="qty">
+<button onclick="changeQty('monthly',-1)">−</button>
+<span id="monthly">0</span>
+<button onclick="changeQty('monthly',1)">+</button>
+</div>
+</div>
+
+<button class="go-cart" onclick="addToCart()">Add to Cart</button>
+</div>
+
+<!-- NAV -->
 <div class="bottom-nav">
-  <div class="active"><i class="fa-solid fa-house"></i>Home</div>
-  <div><i class="fa-solid fa-box"></i>Products</div>
-  <div><i class="fa-solid fa-cart-shopping"></i>Cart</div>
-  <div><i class="fa-solid fa-fire"></i>Offers</div>
-  <div><i class="fa-solid fa-user"></i>Profile</div>
+<div class="active"><i class="fa-solid fa-house"></i>Home</div>
+<div onclick="location.href='products.html'"><i class="fa-solid fa-box"></i>Products</div>
+<div onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i>Cart</div>
+<div><i class="fa-solid fa-fire"></i>Offers</div>
+<div><i class="fa-solid fa-user"></i>Profile</div>
 </div>
 
 <script>
-let qty = 0;
+let qty={one:0,weekly:0,monthly:0};
 
-function changeQty(val){
-  qty += val;
-  if(qty < 0) qty = 0;
-  document.getElementById("qty").innerText = qty;
+function changeQty(type,val){
+  qty[type]+=val;
+  if(qty[type]<0) qty[type]=0;
+  document.getElementById(type).innerText=qty[type];
 }
 
 function addToCart(){
-  if(qty === 0){
-    alert("Please add quantity");
-    return;
-  }
+if(qty.one==0 && qty.weekly==0 && qty.monthly==0){
+alert("Please add quantity");return;
+}
 
-  let cart = {
-    product: "1 Jar Refill",
-    price: 40,
-    quantity: qty
-  };
+localStorage.setItem("pyasoCart",JSON.stringify([
+{title:"1 Jar Refill",price:40,qty:qty.one},
+{title:"Weekly Refill",price:245,qty:qty.weekly},
+{title:"Monthly Refill",price:899,qty:qty.monthly}
+]));
 
-  localStorage.setItem("pyasoCart", JSON.stringify(cart));
-  window.location.href = "cart.html";
+location.href="cart.html";
 }
 </script>
 
