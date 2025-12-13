@@ -1,30 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Cart</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>My Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="header">
+<!-- HEADER -->
+<div class="header small-header">
   <h1>My Cart</h1>
 </div>
 
-<div class="card" id="cartItems"></div>
+<div class="cart-container" id="cartItems">
+  <!-- Items will load here -->
+</div>
+
+<!-- TOTAL -->
+<div class="cart-total" id="cartTotal"></div>
+
+<!-- CHECKOUT -->
+<div class="checkout">
+  <button onclick="placeOrder()">Place Order</button>
+</div>
 
 <script>
-let jar=+localStorage.getItem("jar");
-let weekly=+localStorage.getItem("weekly");
-let monthly=+localStorage.getItem("monthly");
+let jar = +localStorage.getItem("jar") || 0;
+let weekly = +localStorage.getItem("weekly") || 0;
+let monthly = +localStorage.getItem("monthly") || 0;
 
-let html="", total=0;
+let html = "";
+let total = 0;
 
-if(jar>0){html+=`<p>${jar} Jar = ₹${jar*40}</p>`; total+=jar*40;}
-if(weekly>0){html+=`<p>Weekly = ₹245</p>`; total+=245;}
-if(monthly>0){html+=`<p>Monthly = ₹899</p>`; total+=899;}
+if(jar > 0){
+  let price = jar * 40;
+  total += price;
+  html += `
+  <div class="cart-card">
+    <div class="cart-icon">🫙</div>
+    <div class="cart-text">
+      <h3>1 Jar Refill</h3>
+      <small>${jar} × ₹40</small>
+    </div>
+    <div class="cart-price">₹${price}</div>
+  </div>`;
+}
 
-html+=`<hr><h3>Total: ₹${total}</h3>`;
-document.getElementById("cartItems").innerHTML=html;
+if(weekly > 0){
+  total += 245;
+  html += `
+  <div class="cart-card">
+    <div class="cart-icon">📅</div>
+    <div class="cart-text">
+      <h3>Weekly Refill</h3>
+      <small>7 cans / week</small>
+    </div>
+    <div class="cart-price">₹245</div>
+  </div>`;
+}
+
+if(monthly > 0){
+  total += 899;
+  html += `
+  <div class="cart-card">
+    <div class="cart-icon">🗓️</div>
+    <div class="cart-text">
+      <h3>Monthly Refill</h3>
+      <small>30 cans / month</small>
+    </div>
+    <div class="cart-price">₹899</div>
+  </div>`;
+}
+
+if(html === ""){
+  html = `<p style="text-align:center;color:#888;">Your cart is empty</p>`;
+}
+
+document.getElementById("cartItems").innerHTML = html;
+document.getElementById("cartTotal").innerHTML =
+  `<span>Total Payable</span><strong>₹${total}</strong>`;
+
+function placeOrder(){
+  alert("Order placed successfully 🚚💧");
+}
 </script>
 
 </body>
