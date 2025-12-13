@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PYASO - Quick Water Delivery</title>
+  <title>PYASO – Quick Water Delivery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
 <div class="app">
 
   <!-- HEADER -->
@@ -19,88 +19,69 @@
     <span class="city">Lucknow</span>
   </header>
 
-  <!-- SERVICE INFO -->
-  <div class="info-bar">
-    ⏰ Service: 8:00 AM – 11:00 PM
-  </div>
+  <div class="info-bar">⏰ Service: 8:00 AM – 11:00 PM</div>
 
-  <!-- ACTIONS -->
+  <!-- ACTION CARDS -->
   <div class="grid">
-
     <div class="card">
       <h3>💧 Refill Water</h3>
-      <p>10L ₹25 | 20L ₹40 | 30L ₹55</p>
-      <button onclick="openRefill()">Select</button>
+      <p>10L / 20L / 30L</p>
+      <button onclick="showRefill()">Select</button>
     </div>
 
     <div class="card">
       <h3>🫙 Buy Jar / Bottle</h3>
-      <p>Jar & Bottle available</p>
-      <button onclick="alert('Jar & Bottle – Coming Next')">Select</button>
+      <p>Jar & Bottle</p>
+      <button onclick="showJar()">Select</button>
     </div>
 
     <div class="card">
       <h3>🔁 Subscription</h3>
-      <p>Weekly / Monthly plans</p>
-      <button onclick="alert('Subscription – Coming Next')">Select</button>
+      <p>Weekly / Monthly</p>
+      <button onclick="showSubscription()">Select</button>
     </div>
 
     <div class="card">
       <h3>🎉 Bulk Order</h3>
       <p>Marriage / Party</p>
-      <button onclick="alert('Bulk Order – Coming Next')">Select</button>
+      <button onclick="showBulk()">Select</button>
     </div>
-
   </div>
 
-  <!-- INSTANT -->
   <div class="instant">
     🚀 Need water fast? Get delivery in 45 minutes
-    <button onclick="alert('Instant delivery in 45 minutes')">Instant Order</button>
+    <button onclick="addToCart('Instant Delivery', 50)">Instant Order</button>
   </div>
 
   <!-- CART -->
-  <div id="cart" style="display:none; margin-top:20px; background:#fff; padding:15px; border-radius:16px;">
+  <div id="cart" class="cart hidden">
     <h3>🛒 Your Cart</h3>
+    <p id="cartItem"></p>
 
-    <p><strong>Refill Water - 20L</strong></p>
-    <p>Price per can: ₹40</p>
-
-    <div style="display:flex; gap:10px; align-items:center;">
-      <button onclick="decreaseQty()">−</button>
+    <div class="qty">
+      <button onclick="changeQty(-1)">−</button>
       <span id="qty">1</span>
-      <button onclick="increaseQty()">+</button>
+      <button onclick="changeQty(1)">+</button>
     </div>
 
-    <hr>
+    <p><b>Total: ₹<span id="total">0</span></b></p>
 
-    <p><strong>Total: ₹<span id="total">40</span></strong></p>
-
-    <button onclick="goToPayment()">Proceed to Payment</button>
+    <button class="pay" onclick="pay()">Proceed to Payment</button>
   </div>
 
 </div>
 
-<!-- JAVASCRIPT -->
 <script>
-let price = 40;
+let price = 0;
 let quantity = 1;
 
-function openRefill() {
-  document.getElementById("cart").style.display = "block";
-  window.scrollTo(0, document.body.scrollHeight);
-}
-
-function increaseQty() {
-  quantity++;
+function addToCart(name, p) {
+  price = p;
+  quantity = 1;
+  document.getElementById("cartItem").innerText =
+    name + " – ₹" + p + " per unit";
   updateTotal();
-}
-
-function decreaseQty() {
-  if (quantity > 1) {
-    quantity--;
-    updateTotal();
-  }
+  document.getElementById("cart").classList.remove("hidden");
 }
 
 function updateTotal() {
@@ -108,8 +89,52 @@ function updateTotal() {
   document.getElementById("total").innerText = price * quantity;
 }
 
-function goToPayment() {
-  alert("Next Step: Payment Screen (COD / UPI)");
+function changeQty(val) {
+  if (quantity + val >= 1) {
+    quantity += val;
+    updateTotal();
+  }
+}
+
+/* REFILL */
+function showRefill() {
+  let opt = prompt("Select Refill:\n1. 10L – ₹25\n2. 20L – ₹40\n3. 30L – ₹55");
+  if (opt == 1) addToCart("Refill Water 10L", 25);
+  if (opt == 2) addToCart("Refill Water 20L", 40);
+  if (opt == 3) addToCart("Refill Water 30L", 55);
+}
+
+/* JAR / BOTTLE */
+function showJar() {
+  let opt = prompt("Select:\n1. 16L Jar – ₹600\n2. 20L Bottle – ₹250");
+  if (opt == 1) addToCart("16L Water Jar", 600);
+  if (opt == 2) addToCart("20L Water Bottle", 250);
+}
+
+/* SUBSCRIPTION */
+function showSubscription() {
+  let opt = prompt(
+    "Subscription Plans:\n1. 30 Bottles – ₹900\n2. 7 Bottles – ₹37/bottle\n3. 15 Bottles – ₹35/bottle"
+  );
+  if (opt == 1) addToCart("Subscription 30 Bottles", 900);
+  if (opt == 2) addToCart("Subscription 7 Bottles", 37);
+  if (opt == 3) addToCart("Subscription 15 Bottles", 35);
+}
+
+/* BULK */
+function showBulk() {
+  let opt = prompt(
+    "Bulk Order:\n1. 10 Cans – ₹35/can\n2. 20 Cans – ₹30/can\n3. 40 Cans – ₹25/can"
+  );
+  if (opt == 1) addToCart("Bulk Order 10 Cans", 35);
+  if (opt == 2) addToCart("Bulk Order 20 Cans", 30);
+  if (opt == 3) addToCart("Bulk Order 40 Cans", 25);
+}
+
+function pay() {
+  alert(
+    "Payment Successful ✅\n\nOrder Confirmed!\nDelivery slot will be shared."
+  );
 }
 </script>
 
