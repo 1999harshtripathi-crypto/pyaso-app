@@ -1,92 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PYASO</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>PYASO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <img src="Screenshot_20251213-180537~2.png" class="logo">
-  <h1>PYASO</h1>
-  <p>Water to your 🚪</p>
-</div>
+  <!-- HEADER -->
+  <div class="header">
+    <img src="Screenshot_20251213-180537~2.png" class="logo">
+    <h1>PYASO</h1>
+    <p>Water to your 🚪</p>
+  </div>
 
-<!-- SINGLE JAR -->
-<div class="card">
-  <div class="row">
-    <div class="icon">
-      <img src="Screenshot_20251213-180537~2.png" class="jar-logo">
-    </div>
+  <!-- SINGLE JAR -->
+  <div class="card">
+    <div class="row">
+      <div class="icon">
+        <img src="Screenshot_20251213-180537~2.png" class="jar-logo">
+      </div>
 
-    <div class="text">
-      <h3>1 Jar</h3>
-      <small id="jarPrice"></small>
-    </div>
+      <div class="text">
+        <h3>1 Jar</h3>
+        <small id="jarPrice"></small>
+      </div>
 
-    <div class="qty">
-      <button onclick="changeJar(-1)">-</button>
-      <span id="jarQty">0</span>
-      <button onclick="changeJar(1)">+</button>
+      <div class="qty">
+        <button onclick="changeJar(-1)">-</button>
+        <span id="jarQty">0</span>
+        <button onclick="changeJar(1)">+</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- WEEKLY -->
-<div class="card">
-  <span class="tag">WEEKLY</span>
-  <div class="row">
-    <div class="icon">📅</div>
+  <!-- WEEKLY -->
+  <div class="card">
+    <span class="tag">WEEKLY</span>
+    <div class="row">
+      <div class="icon">📅</div>
 
-    <div class="text">
-      <h3>Weekly</h3>
-      <small>₹245 / month</small>
-    </div>
+      <div class="text">
+        <h3>Weekly</h3>
+        <small>₹245 / month</small>
+      </div>
 
-    <div class="qty">
-      <button onclick="changeWeekly(-1)">-</button>
-      <span id="weeklyQty">0</span>
-      <button onclick="changeWeekly(1)">+</button>
-    </div>
-  </div>
-</div>
-
-<!-- MONTHLY -->
-<div class="card">
-  <span class="tag orange">MONTHLY</span>
-  <div class="row">
-    <div class="icon">🗓️</div>
-
-    <div class="text">
-      <h3>Monthly</h3>
-      <small>₹899 / month</small>
-    </div>
-
-    <div class="qty">
-      <button onclick="changeMonthly(-1)">-</button>
-      <span id="monthlyQty">0</span>
-      <button onclick="changeMonthly(1)">+</button>
+      <div class="qty">
+        <button onclick="changeWeekly(-1)">-</button>
+        <span id="weeklyQty">0</span>
+        <button onclick="changeWeekly(1)">+</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- GO TO CART -->
-<div class="checkout">
-  <button onclick="goToCart()">Go to Cart</button>
-</div>
+  <!-- MONTHLY -->
+  <div class="card">
+    <span class="tag orange">MONTHLY</span>
+    <div class="row">
+      <div class="icon">🗓️</div>
 
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <a class="active">🏠<span>Home</span></a>
-  <a>💼<span>Wallet</span></a>
-  <a href="cart.html">🛒<span>Cart</span></a>
-  <a>🔥<span>Offers</span></a>
-  <a>👤<span>Profile</span></a>
-</div>
+      <div class="text">
+        <h3>Monthly</h3>
+        <small>₹899 / month</small>
+      </div>
 
-<script src="script.js"></script>
+      <div class="qty">
+        <button onclick="changeMonthly(-1)">-</button>
+        <span id="monthlyQty">0</span>
+        <button onclick="changeMonthly(1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GO TO CART -->
+  <div class="checkout">
+    <button onclick="goToCart()">Go to Cart</button>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a class="active">🏠<span>Home</span></a>
+    <a>💼<span>Wallet</span></a>
+    <a href="cart.html">🛒<span>Cart</span></a>
+    <a>🔥<span>Offers</span></a>
+    <a>👤<span>Profile</span></a>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
