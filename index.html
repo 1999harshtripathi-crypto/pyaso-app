@@ -4,26 +4,29 @@
 <meta charset="UTF-8">
 <title>PYASO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <div class="container">
 
-  <!-- Header -->
+  <!-- HEADER -->
   <div class="header">
-    <div class="logo">P</div>
-    <h1>PYASO</h1>
-    <p>Pure RO Water • On-time Delivery 🚪</p>
+    <div class="logo-circle">P</div>
+    <h1 class="brand">PYASO</h1>
+    <p class="tagline">Pure RO Water • On-time Delivery 🚪</p>
   </div>
 
-  <!-- Product Card -->
-  <div class="card" data-price="40">
-    <div class="card-left">
+  <!-- ONE TIME -->
+  <div class="card">
+    <div class="left">
       <h3>1 Jar Refill</h3>
-      <span>₹40 per jar (one-time)</span>
+      <p class="price">₹40 <span>/ jar (one-time)</span></p>
     </div>
     <div class="qty">
       <button onclick="changeQty(this,-1)">−</button>
@@ -32,13 +35,14 @@
     </div>
   </div>
 
-  <!-- Weekly -->
-  <div class="card highlight" data-price="245">
-    <div class="tag">RECOMMENDED ⭐</div>
-    <div class="card-left">
+  <!-- WEEKLY -->
+  <div class="card active-border">
+    <div class="badge">RECOMMENDED ⭐</div>
+    <div class="left">
       <h3>Weekly Refill</h3>
-      <span>7 jars / week • ₹245</span>
-      <small>₹35 / jar • Save ₹35</small>
+      <p class="sub">7 jars / week</p>
+      <p class="price">₹245 <span>(₹35 / jar)</span></p>
+      <p class="save">Save ₹35 / week</p>
     </div>
     <div class="qty">
       <button onclick="changeQty(this,-1)">−</button>
@@ -47,13 +51,14 @@
     </div>
   </div>
 
-  <!-- Monthly -->
-  <div class="card highlight" data-price="899">
-    <div class="tag best">BEST VALUE 🔥</div>
-    <div class="card-left">
+  <!-- MONTHLY -->
+  <div class="card active-border">
+    <div class="badge best">BEST VALUE 🔥</div>
+    <div class="left">
       <h3>Monthly Refill</h3>
-      <span>30 jars / month • ₹899</span>
-      <small>₹29 / jar • Cancel anytime</small>
+      <p class="sub">30 jars / month</p>
+      <p class="price">₹899 <span>(₹29 / jar)</span></p>
+      <p class="save">Cancel anytime</p>
     </div>
     <div class="qty">
       <button onclick="changeQty(this,-1)">−</button>
@@ -64,7 +69,6 @@
 
 </div>
 
-<!-- Add to Cart -->
 <button id="cartBtn">Select quantity</button>
 
 <script>
@@ -74,16 +78,18 @@ function changeQty(btn, val) {
   qty = Math.max(0, qty + val);
   qtyBox.children[1].innerText = qty;
 
-  btn.closest('.card').classList.toggle('active', qty > 0);
   updateCart();
 }
 
 function updateCart() {
   let total = 0;
   document.querySelectorAll('.card').forEach(card => {
-    const price = parseInt(card.dataset.price);
     const qty = parseInt(card.querySelector('.qty span').innerText);
-    total += price * qty;
+    if (qty > 0) {
+      const priceText = card.querySelector('.price').innerText;
+      const price = parseInt(priceText.replace(/\D/g,''));
+      total += price * qty;
+    }
   });
 
   const btn = document.getElementById("cartBtn");
