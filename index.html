@@ -1,101 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>PYASO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
-<body>
-
+<body onload="loadQty()">
 <div class="container">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo-circle">P</div>
-    <h1 class="brand">PYASO</h1>
-    <p class="tagline">Pure RO Water • On-time Delivery 🚪</p>
-  </div>
+<img src="images/Screenshot_20251213-180537~2.png" class="logo-img">
+<h1>PYASO</h1>
+<div class="tagline">Water to your 🚪</div>
 
-  <!-- ONE TIME -->
-  <div class="card">
-    <div class="left">
-      <h3>1 Jar Refill</h3>
-      <p class="price">₹40 <span>/ jar (one-time)</span></p>
-    </div>
-    <div class="qty">
-      <button onclick="changeQty(this,-1)">−</button>
-      <span>0</span>
-      <button onclick="changeQty(this,1)">+</button>
+<!-- ONE JAR -->
+<div class="card">
+  <div class="left">
+    <img src="images/cJtyGezw.webp" class="product-img">
+    <div>
+      <b>1 Jar Refill</b>
+      <div>₹40 per jar (one-time)</div>
     </div>
   </div>
-
-  <!-- WEEKLY -->
-  <div class="card active-border">
-    <div class="badge">RECOMMENDED ⭐</div>
-    <div class="left">
-      <h3>Weekly Refill</h3>
-      <p class="sub">7 jars / week</p>
-      <p class="price">₹245 <span>(₹35 / jar)</span></p>
-      <p class="save">Save ₹35 / week</p>
-    </div>
-    <div class="qty">
-      <button onclick="changeQty(this,-1)">−</button>
-      <span>0</span>
-      <button onclick="changeQty(this,1)">+</button>
-    </div>
+  <div class="qty">
+    <button onclick="updateQty('refill',40,'1 Jar Refill','cJtyGezw.webp',-1)">−</button>
+    <span id="refill">0</span>
+    <button onclick="updateQty('refill',40,'1 Jar Refill','cJtyGezw.webp',1)">+</button>
   </div>
-
-  <!-- MONTHLY -->
-  <div class="card active-border">
-    <div class="badge best">BEST VALUE 🔥</div>
-    <div class="left">
-      <h3>Monthly Refill</h3>
-      <p class="sub">30 jars / month</p>
-      <p class="price">₹899 <span>(₹29 / jar)</span></p>
-      <p class="save">Cancel anytime</p>
-    </div>
-    <div class="qty">
-      <button onclick="changeQty(this,-1)">−</button>
-      <span>0</span>
-      <button onclick="changeQty(this,1)">+</button>
-    </div>
-  </div>
-
 </div>
 
-<button id="cartBtn">Select quantity</button>
+<!-- WEEKLY -->
+<div class="card">
+  <div class="left">
+    <div>
+      <div class="label">WEEKLY</div>
+      <b>Weekly Refill</b>
+      <div>7 jars / week · ₹245</div>
+    </div>
+  </div>
+  <div class="qty">
+    <button onclick="updateQty('weekly',245,'Weekly Refill','cJtyGezw.webp',-1)">−</button>
+    <span id="weekly">0</span>
+    <button onclick="updateQty('weekly',245,'Weekly Refill','cJtyGezw.webp',1)">+</button>
+  </div>
+</div>
 
-<script>
-function changeQty(btn, val) {
-  const qtyBox = btn.parentElement;
-  let qty = parseInt(qtyBox.children[1].innerText);
-  qty = Math.max(0, qty + val);
-  qtyBox.children[1].innerText = qty;
+<!-- MONTHLY -->
+<div class="card">
+  <div class="left">
+    <div>
+      <div class="label">MONTHLY</div>
+      <b>Monthly Refill</b>
+      <div>30 jars / month · ₹899</div>
+    </div>
+  </div>
+  <div class="qty">
+    <button onclick="updateQty('monthly',899,'Monthly Refill','cJtyGezw.webp',-1)">−</button>
+    <span id="monthly">0</span>
+    <button onclick="updateQty('monthly',899,'Monthly Refill','cJtyGezw.webp',1)">+</button>
+  </div>
+</div>
 
-  updateCart();
-}
+<button class="main-btn" onclick="goCart()">Add to Cart</button>
+</div>
 
-function updateCart() {
-  let total = 0;
-  document.querySelectorAll('.card').forEach(card => {
-    const qty = parseInt(card.querySelector('.qty span').innerText);
-    if (qty > 0) {
-      const priceText = card.querySelector('.price').innerText;
-      const price = parseInt(priceText.replace(/\D/g,''));
-      total += price * qty;
-    }
-  });
+<div class="bottom-nav">
+  <div class="active"><i class="fa-solid fa-house"></i>Home</div>
+  <div onclick="location.href='products.html'"><i class="fa-solid fa-box"></i>Products</div>
+  <div onclick="goCart()"><i class="fa-solid fa-cart-shopping"></i>Cart</div>
+  <div><i class="fa-solid fa-fire"></i>Offers</div>
+  <div><i class="fa-solid fa-user"></i>Profile</div>
+</div>
 
-  const btn = document.getElementById("cartBtn");
-  btn.innerText = total > 0 ? `Add to Cart • ₹${total}` : "Select quantity";
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
