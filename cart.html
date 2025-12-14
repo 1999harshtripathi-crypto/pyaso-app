@@ -1,168 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Your Cart</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f3f7fb;
-}
-.container{
-  padding:16px;
-  padding-bottom:100px;
-}
-h2{
-  margin-bottom:12px;
-}
-.cart-item{
-  background:#fff;
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 6px 14px rgba(0,0,0,.06);
-}
-.cart-left{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-.icon{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:#eaf6ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-}
-.title{
-  font-weight:bold;
-}
-.price{
-  color:#555;
-  font-size:14px;
-}
-.qty{
-  font-size:14px;
-  color:#333;
-}
-.bill{
-  background:#fff;
-  border-radius:16px;
-  padding:16px;
-  margin-top:18px;
-  box-shadow:0 6px 14px rgba(0,0,0,.06);
-}
-.bill-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-  color:#444;
-}
-.bill-row.total{
-  font-weight:bold;
-  font-size:18px;
-}
-.checkout{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  padding:14px;
-  box-shadow:0 -4px 12px rgba(0,0,0,.1);
-}
-.checkout button{
-  width:100%;
-  padding:14px;
-  border:none;
-  background:#2f80ed;
-  color:#fff;
-  font-size:16px;
-  border-radius:14px;
-}
-.empty{
-  text-align:center;
-  margin-top:60px;
-  color:#777;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
 <div class="container">
-<h2>Your Cart</h2>
-
+<h1>Your Cart</h1>
 <div id="cartItems"></div>
-
-<div class="bill" id="billBox" style="display:none">
-  <div class="bill-row">
-    <span>Item Total</span>
-    <span id="itemTotal">₹0</span>
-  </div>
-  <div class="bill-row">
-    <span>Delivery</span>
-    <span>₹0</span>
-  </div>
-  <div class="bill-row total">
-    <span>Grand Total</span>
-    <span id="grandTotal">₹0</span>
-  </div>
-</div>
-</div>
-
-<div class="checkout" id="checkoutBox" style="display:none">
-  <button onclick="checkout()">Proceed to Checkout</button>
 </div>
 
 <script>
-let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
-let cartDiv = document.getElementById("cartItems");
+let cart = JSON.parse(localStorage.getItem("pyasoCart")) || {};
 let total = 0;
+let html = "";
 
-cart.forEach(item=>{
-  if(item.qty>0){
-    total += item.qty * item.price;
-
-    cartDiv.innerHTML += `
-    <div class="cart-item">
-      <div class="cart-left">
-        <div class="icon">💧</div>
+for(let id in cart){
+  if(cart[id].qty > 0){
+    let price = cart[id].price * cart[id].qty;
+    total += price;
+    html += `
+    <div class="card">
+      <div class="left">
+        <img src="images/${cart[id].img}" class="product-img">
         <div>
-          <div class="title">${item.title}</div>
-          <div class="price">₹${item.price}</div>
-          <div class="qty">Qty: ${item.qty}</div>
+          <b>${cart[id].name}</b>
+          <div>Qty: ${cart[id].qty}</div>
         </div>
       </div>
-      <div><b>₹${item.qty * item.price}</b></div>
+      <b>₹${price}</b>
     </div>`;
   }
-});
-
-if(total===0){
-  cartDiv.innerHTML = `<div class="empty">🛒 Your cart is empty</div>`;
-}else{
-  document.getElementById("billBox").style.display="block";
-  document.getElementById("checkoutBox").style.display="block";
-  document.getElementById("itemTotal").innerText="₹"+total;
-  document.getElementById("grandTotal").innerText="₹"+total;
 }
 
-function checkout(){
-  alert("Order placed successfully 🎉\n(Next step: payment)");
-}
+html += `
+<div class="card">
+  <div>
+    <div>Item Total</div>
+    <b>₹${total}</b>
+  </div>
+</div>
+<button class="main-btn">Proceed to Checkout</button>
+`;
+
+document.getElementById("cartItems").innerHTML = html;
 </script>
-
 </body>
 </html>
