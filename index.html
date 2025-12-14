@@ -4,135 +4,90 @@
 <meta charset="UTF-8">
 <title>PYASO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#bfe5ff,#f7fbff)}
-.container{padding:20px;padding-bottom:90px;text-align:center}
-.logo-img{width:90px;mix-blend-mode:multiply}
-h1{margin:10px 0 4px;font-size:28px}
-.tagline{color:#2b3a4a}
-.card{background:#fff;border-radius:18px;padding:15px;margin:16px 0;
-box-shadow:0 8px 18px rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center}
-.left{display:flex;gap:12px;text-align:left}
-.icon{width:44px;height:44px;background:#eaf6ff;border-radius:50%;
-display:flex;align-items:center;justify-content:center}
-.label{background:orange;color:#fff;font-size:11px;padding:3px 8px;border-radius:10px}
-.qty{display:flex;align-items:center;gap:8px}
-.qty button{width:36px;height:36px;border-radius:50%;border:none;background:#eaf6ff;font-size:18px}
-.go-cart{width:100%;padding:14px;background:#2f80ed;color:#fff;border:none;border-radius:14px;font-size:16px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;
-justify-content:space-around;border-top:1px solid #ddd;padding:8px 0}
-.bottom-nav div{text-align:center;font-size:12px;color:#777}
-.bottom-nav i{font-size:18px;display:block}
-.active{color:#2f80ed}
-</style>
 </head>
 
 <body>
 
 <div class="container">
 
-<img src="Screenshot_20251213-180537~2.png" class="logo-img">
-<h1>PYASO</h1>
-<div class="tagline">Water to your 🚪</div>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">P</div>
+    <h1>PYASO</h1>
+    <p>Pure RO Water • On-time Delivery 🚪</p>
+  </div>
 
-<!-- ONE TIME -->
-<div class="card">
-<div class="left">
-<div class="icon">💧</div>
-<div>
-<b>1 Jar Refill</b>
-<div>₹40 per jar (one-time)</div>
-</div>
-</div>
-<div class="qty">
-<button onclick="changeQty('one',-1)">−</button>
-<span id="one">0</span>
-<button onclick="changeQty('one',1)">+</button>
-</div>
-</div>
+  <!-- Product Card -->
+  <div class="card" data-price="40">
+    <div class="card-left">
+      <h3>1 Jar Refill</h3>
+      <span>₹40 per jar (one-time)</span>
+    </div>
+    <div class="qty">
+      <button onclick="changeQty(this,-1)">−</button>
+      <span>0</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+  </div>
 
-<!-- WEEKLY -->
-<div class="card">
-<div class="left">
-<div>
-<div class="label">WEEKLY</div>
-<b>Weekly Refill</b>
-<div>7 jars / week · ₹245</div>
-</div>
-</div>
-<div class="qty">
-<button onclick="changeQty('weekly',-1)">−</button>
-<span id="weekly">0</span>
-<button onclick="changeQty('weekly',1)">+</button>
-</div>
-</div>
+  <!-- Weekly -->
+  <div class="card highlight" data-price="245">
+    <div class="tag">RECOMMENDED ⭐</div>
+    <div class="card-left">
+      <h3>Weekly Refill</h3>
+      <span>7 jars / week • ₹245</span>
+      <small>₹35 / jar • Save ₹35</small>
+    </div>
+    <div class="qty">
+      <button onclick="changeQty(this,-1)">−</button>
+      <span>0</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+  </div>
 
-<!-- MONTHLY -->
-<div class="card">
-<div class="left">
-<div>
-<div class="label">MONTHLY</div>
-<b>Monthly Refill</b>
-<div>30 jars / month · ₹899</div>
-</div>
-</div>
-<div class="qty">
-<button onclick="changeQty('monthly',-1)">−</button>
-<span id="monthly">0</span>
-<button onclick="changeQty('monthly',1)">+</button>
-</div>
-</div>
+  <!-- Monthly -->
+  <div class="card highlight" data-price="899">
+    <div class="tag best">BEST VALUE 🔥</div>
+    <div class="card-left">
+      <h3>Monthly Refill</h3>
+      <span>30 jars / month • ₹899</span>
+      <small>₹29 / jar • Cancel anytime</small>
+    </div>
+    <div class="qty">
+      <button onclick="changeQty(this,-1)">−</button>
+      <span>0</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+  </div>
 
-<button class="go-cart" onclick="addToCart()">Add to Cart</button>
 </div>
 
-<!-- NAV -->
-<div class="bottom-nav">
-<div class="active"><i class="fa-solid fa-house"></i>Home</div>
-<div onclick="location.href='products.html'"><i class="fa-solid fa-box"></i>Products</div>
-<div onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i>Cart</div>
-<div><i class="fa-solid fa-fire"></i>Offers</div>
-<div><i class="fa-solid fa-user"></i>Profile</div>
-</div>
+<!-- Add to Cart -->
+<button id="cartBtn">Select quantity</button>
 
 <script>
-let qty = { one:0, weekly:0, monthly:0 };
+function changeQty(btn, val) {
+  const qtyBox = btn.parentElement;
+  let qty = parseInt(qtyBox.children[1].innerText);
+  qty = Math.max(0, qty + val);
+  qtyBox.children[1].innerText = qty;
 
-function changeQty(type,val){
-  qty[type] += val;
-  if(qty[type] < 0) qty[type] = 0;
-  document.getElementById(type).innerText = qty[type];
+  btn.closest('.card').classList.toggle('active', qty > 0);
+  updateCart();
 }
 
-function addToCart(){
-  if(qty.one==0 && qty.weekly==0 && qty.monthly==0){
-    alert("Please add quantity");
-    return;
-  }
-
-  let cart = JSON.parse(localStorage.getItem("pyasoCart")) || [];
-
-  const items = [
-    {title:"1 Jar Refill", price:40, qty:qty.one},
-    {title:"Weekly Refill", price:245, qty:qty.weekly},
-    {title:"Monthly Refill", price:899, qty:qty.monthly}
-  ];
-
-  items.forEach(item=>{
-    if(item.qty > 0){
-      let found = cart.find(c => c.title === item.title);
-      if(found){
-        found.qty += item.qty;
-      }else{
-        cart.push(item);
-      }
-    }
+function updateCart() {
+  let total = 0;
+  document.querySelectorAll('.card').forEach(card => {
+    const price = parseInt(card.dataset.price);
+    const qty = parseInt(card.querySelector('.qty span').innerText);
+    total += price * qty;
   });
 
-  localStorage.setItem("pyasoCart", JSON.stringify(cart));
-  location.href = "cart.html";
+  const btn = document.getElementById("cartBtn");
+  btn.innerText = total > 0 ? `Add to Cart • ₹${total}` : "Select quantity";
 }
 </script>
 
